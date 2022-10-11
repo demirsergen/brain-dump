@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Link from "next/link";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Profile = () => {
   const [user, loading] = useAuthState(auth);
@@ -18,9 +19,20 @@ const Profile = () => {
       });
   };
 
+  console.log(user);
+
   return (
     <div className="shadow p-4 my-4 flex items-center justify-between">
-      <h1>{user?.displayName}</h1>
+      <div className="flex items-center gap-2">
+        <Image
+          src={user?.photoURL}
+          alt="Picture of the profil owner"
+          width={30}
+          height={30}
+          className="rounded-full"
+        />
+        <h1>{user?.displayName}</h1>
+      </div>
       <Link href="/auth/login">
         <button
           onClick={signout}
