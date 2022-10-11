@@ -19,8 +19,6 @@ const Profile = () => {
       });
   };
 
-  console.log(user);
-
   return (
     <div className="shadow p-4 my-4 flex items-center justify-between">
       <div className="flex items-center gap-2">
@@ -31,7 +29,7 @@ const Profile = () => {
           height={30}
           className="rounded-full"
         />
-        <h1>{user?.displayName}</h1>
+        <h1 className="text-teal-50">{user?.displayName}</h1>
       </div>
       <Link href="/auth/login">
         <button

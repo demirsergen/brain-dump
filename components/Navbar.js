@@ -3,6 +3,7 @@ import React from "react";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { MdAdd } from "react-icons/md";
+import Image from "next/image";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
@@ -11,20 +12,24 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between">
       <Link href="/">
-        <button className="font-medium">Brain Dump</button>
+        <button className=" text-teal-50 font-bold"> braindump</button>
       </Link>
 
       {user ? (
         <ul className="flex items-center gap-2">
-          <Link href="/dashboard">
+          <Link href="/addpost">
             <a>
-              <MdAdd className="bg-gray-100" size={30} />
+              <MdAdd className="bg-teal-500 rounded text-teal-50" size={30} />
             </a>
           </Link>
           <Link href="/profile">
-            <button className=" px-4 py-2 bg-teal-500 rounded text-sm text-teal-50">
-              Profile
-            </button>
+            <Image
+              src={user?.photoURL}
+              alt="Picture of the profil owner"
+              width={30}
+              height={30}
+              className="rounded-full"
+            />
           </Link>
         </ul>
       ) : (
