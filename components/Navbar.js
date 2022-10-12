@@ -10,7 +10,7 @@ const Navbar = () => {
   const linkHref = user ? "/profile" : "/auth/login";
 
   return (
-    <nav className="flex items-center justify-between">
+    <nav className="flex items-center justify-between py-4">
       <Link href="/">
         <button className=" text-teal-50 font-bold"> braindump</button>
       </Link>

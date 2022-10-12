@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const Addpost = () => {
   const [user, loading] = useAuthState(auth);
@@ -26,13 +27,22 @@ const Addpost = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(dump);
+    const dumpCollectionRef = collection(db, "dumps");
+    await addDoc(dumpCollectionRef, {
+      ...dump,
+      timestamp: serverTimestamp(),
+      userId: user.uid,
+      username: user.displayName,
+      avatar: user.photoURL,
+    });
     setDump({
       text: "",
       tag: "",
     });
+
+    router.push("/");
   };
 
   return (
@@ -40,7 +50,7 @@ const Addpost = () => {
       <h1 className="text-teal-50 text-center uppercase font-bold">
         Dump your ideas
       </h1>
-      <form className="px-2">
+      <form className="px-2" onSubmit={handleSubmit}>
         {/* Todo
             - hook firestore and upload post
             - show it on homepage
@@ -75,7 +85,7 @@ const Addpost = () => {
           />
         </div>
         <button
-          onClick={handleSubmit}
+          type="submit"
           className="bg-teal-500 text-teal-50 w-full text-medium my-2 p-2 rounded block mx-auto"
         >
           Share!

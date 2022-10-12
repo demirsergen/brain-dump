@@ -1,10 +1,11 @@
 import React from "react";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Link from "next/link";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { collection } from "firebase/firestore";
 
 const Profile = () => {
   const [user, loading] = useAuthState(auth);
@@ -20,7 +21,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="shadow p-4 my-4 flex items-center justify-between">
+    <div className="shadow p-4 my-4  bg-slate-600 rounded">
       <div className="flex items-center gap-2">
         <Image
           src={user?.photoURL}
@@ -30,15 +31,18 @@ const Profile = () => {
           className="rounded-full"
         />
         <h1 className="text-teal-50">{user?.displayName}</h1>
+        <Link href="/auth/login">
+          <button
+            onClick={signout}
+            className="bg-teal-500 p-2 rounded text-teal-50 text-sm ml-auto"
+          >
+            Sign Out
+          </button>
+        </Link>
       </div>
-      <Link href="/auth/login">
-        <button
-          onClick={signout}
-          className="bg-teal-500 p-2 rounded text-teal-50 text-sm"
-        >
-          Sign Out
-        </button>
-      </Link>
+      <div className="p-2 shadow bg-slate-200 my-2">
+        <h1>My Dumps</h1>
+      </div>
     </div>
   );
 };

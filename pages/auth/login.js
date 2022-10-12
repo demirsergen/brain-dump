@@ -28,8 +28,8 @@ const Login = () => {
   }, [user]);
 
   return (
-    <div className=" shadow-xl mt-32 p-10 text-gray-700 ">
-      <h1 className="text-2xl font-medium text-center">Login</h1>
+    <div className=" shadow bg-slate-600 mt-16 p-10 text-gray-700 ">
+      <h1 className="text-2xl font-medium text-center text-teal-50">Login</h1>
       <div className="py-4 mx-auto text-center">
         <button
           className="mx-auto p-2  bg-teal-500 rounded text-teal-50 flex items-center justify-center gap-2 text-center pointer w-full "
