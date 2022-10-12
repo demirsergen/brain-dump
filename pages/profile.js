@@ -5,7 +5,6 @@ import Link from "next/link";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { collection } from "firebase/firestore";
 
 const Profile = () => {
   const [user, loading] = useAuthState(auth);
@@ -40,8 +39,8 @@ const Profile = () => {
           </button>
         </Link>
       </div>
-      <div className="p-2 shadow bg-slate-200 my-2">
-        <h1>My Dumps</h1>
+      <div className="p-2 shadow bg-slate-500 rounded my-2">
+        <h1 className="text-teal-50">My Dumps</h1>
       </div>
     </div>
   );

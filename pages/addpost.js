@@ -37,6 +37,7 @@ const Addpost = () => {
       username: user.displayName,
       avatar: user.photoURL,
     });
+
     setDump({
       text: "",
       tag: "",
@@ -46,15 +47,11 @@ const Addpost = () => {
   };
 
   return (
-    <div className="my-4 py-4">
+    <div className="my-4 py-4 bg-slate-600 rounded">
       <h1 className="text-teal-50 text-center uppercase font-bold">
         Dump your ideas
       </h1>
       <form className="px-2" onSubmit={handleSubmit}>
-        {/* Todo
-            - hook firestore and upload post
-            - show it on homepage
-        */}
         <div className="p-2 rounded">
           <label htmlFor="dump" className="text-teal-50">
             Dumpland:
@@ -68,10 +65,11 @@ const Addpost = () => {
             placeholder="Let your mind speak..."
             value={dump.text}
             onChange={handleChange}
+            required
           ></textarea>
         </div>
         <div className="p-2 rounded">
-          <label htmlFor="tags" className="text-teal-50">
+          <label htmlFor="tag" className="text-teal-50">
             Tag:
           </label>
           <br />

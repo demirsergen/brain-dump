@@ -1,6 +1,26 @@
 import Head from "next/head";
+import Dump from "../components/Dump";
+import { useState, useEffect } from "react";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function Home() {
+  const [allDumps, setAllDumps] = useState();
+
+  const getAllData = async () => {
+    const dumpCollectionRef = collection(db, "dumps");
+    const q = query(dumpCollectionRef, orderBy("timestamp", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setAllDumps(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+
+    return unsubscribe;
+  };
+
+  useEffect(() => {
+    getAllData();
+  }, []);
+
   return (
     <div>
       <Head>
@@ -9,7 +29,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main></main>
+      <div className="bg-slate-600 rounded p-2">
+        <h1 className="text-teal-50 text-center font-bold">Latest Dumps</h1>
+        {allDumps?.map((dump) => (
+          <Dump key={dump.id} dump={dump} />
+        ))}
+      </div>
     </div>
   );
 }
