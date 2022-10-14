@@ -5,7 +5,14 @@ import Link from "next/link";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import Dump from "../components/Dump";
 import { BsFillTrashFill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
@@ -39,13 +46,18 @@ const Profile = () => {
     return unsubscribe;
   };
 
+  const deleteDump = async (id) => {
+    const dumpRef = doc(db, "dumps", id);
+    await deleteDoc(dumpRef);
+  };
+
   useEffect(() => {
     getDumps();
   }, [user, loading]);
 
   return (
-    <div className="shadow p-4 my-4  bg-slate-600 rounded">
-      <div className="flex items-center gap-2">
+    <div className="shadow p-2 my-4  bg-slate-600 rounded ">
+      <div className="flex items-center gap-2 border-b-2 pb-2">
         <Image
           src={user?.photoURL}
           alt="Picture of the profil owner"
@@ -70,11 +82,14 @@ const Profile = () => {
             <div key={dump.id} className="bg-slate-500 rounded pb-2">
               <Dump dump={dump} />
               <div className="flex items-center gap-2 px-2">
-                <button className="flex items-center gap-2 text-red-500">
+                <button
+                  className="flex items-center gap-2 text-red-500 font-bold bg-teal-50 rounded p-1"
+                  onClick={() => deleteDump(dump.id)}
+                >
                   <BsFillTrashFill />
                   Delete
                 </button>
-                <button className="flex items-center gap-2 text-teal-500">
+                <button className="flex items-center gap-2 text-teal-500 font-bold bg-teal-50 rounded p-1">
                   <AiFillEdit />
                   Edit
                 </button>

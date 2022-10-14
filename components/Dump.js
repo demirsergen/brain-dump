@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 const Dump = ({ dump }) => {
+  console.log(dump.tag);
   return (
     <div className="bg-slate-500 my-2 rounded p-2">
       <div className="flex gap-2">
@@ -17,7 +18,7 @@ const Dump = ({ dump }) => {
       <div className="bg-gray-100 rounded p-2 my-2">
         <p>{dump.text}</p>
       </div>
-      <span>#{dump.tag}</span>
+      <span className="text-teal-50">#{dump.tag}</span>
     </div>
   );
 };

@@ -78,7 +78,7 @@ const Addpost = () => {
             name="tag"
             className="w-full bg-gray-100 p-2 rounded"
             placeholder="daily, friendship, tech?"
-            value={dump.tag.trim()}
+            value={dump.tag.trim().split(",")}
             onChange={handleChange}
           />
         </div>
