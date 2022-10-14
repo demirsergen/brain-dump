@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import Dump from "../components/Dump";
+import { BsFillTrashFill } from "react-icons/bs";
+import { AiFillEdit } from "react-icons/ai";
 
 const Profile = () => {
   const [user, loading] = useAuthState(auth);
@@ -37,8 +39,6 @@ const Profile = () => {
     return unsubscribe;
   };
 
-  console.log(userDumps);
-
   useEffect(() => {
     getDumps();
   }, [user, loading]);
@@ -65,9 +65,23 @@ const Profile = () => {
       </div>
       <div className="p-2 shadow rounded my-2">
         <h1 className="text-teal-50">My Dumps</h1>
-        {userDumps.map((dump) => (
-          <Dump key={dump.id} dump={dump} />
-        ))}
+        {userDumps.map((dump) => {
+          return (
+            <div key={dump.id} className="bg-slate-500 rounded pb-2">
+              <Dump dump={dump} />
+              <div className="flex items-center gap-2 px-2">
+                <button className="flex items-center gap-2 text-red-500">
+                  <BsFillTrashFill />
+                  Delete
+                </button>
+                <button className="flex items-center gap-2 text-teal-500">
+                  <AiFillEdit />
+                  Edit
+                </button>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
