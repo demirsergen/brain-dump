@@ -43,6 +43,7 @@ const Addpost = () => {
       userId: user.uid,
       username: user.displayName,
       avatar: user.photoURL,
+      likes: 0,
     });
 
     setDump({
@@ -70,7 +71,6 @@ const Addpost = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     const dumpRef = doc(db, "dumps", routerData.id);
-    console.log("ran!");
     await updateDoc(dumpRef, {
       text: dump.text,
       tag: dump.tag,
