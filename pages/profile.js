@@ -51,6 +51,10 @@ const Profile = () => {
     await deleteDoc(dumpRef);
   };
 
+  const editPost = async (id) => {
+    const dumpRef = doc(db, "dumps", id);
+  };
+
   useEffect(() => {
     getDumps();
   }, [user, loading]);
@@ -89,10 +93,12 @@ const Profile = () => {
                   <BsFillTrashFill />
                   Delete
                 </button>
-                <button className="flex items-center gap-2 text-teal-500 font-bold bg-teal-50 rounded p-1">
-                  <AiFillEdit />
-                  Edit
-                </button>
+                <Link href={{ pathname: "/addpost", query: dump }}>
+                  <button className="flex items-center gap-2 text-teal-500 font-bold bg-teal-50 rounded p-1">
+                    <AiFillEdit />
+                    Edit
+                  </button>
+                </Link>
               </div>
             </div>
           );
