@@ -2,12 +2,11 @@ import React from "react";
 import Image from "next/image";
 
 const Dump = ({ dump }) => {
-  const timestamp = dump.timestamp.seconds;
   return (
     <div className="bg-slate-500 my-2 rounded p-2">
       <div className="flex gap-2">
         <Image
-          src={dump.avatar}
+          src={dump?.avatar}
           alt="avatar"
           width={20}
           height={20}

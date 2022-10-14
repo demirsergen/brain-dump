@@ -7,7 +7,6 @@ import Image from "next/image";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
-  const linkHref = user ? "/profile" : "/auth/login";
 
   return (
     <nav className="flex items-center justify-between py-4">
