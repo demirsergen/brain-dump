@@ -9,7 +9,7 @@ const Navbar = () => {
   const [user, loading] = useAuthState(auth);
 
   return (
-    <nav className="flex items-center justify-between p-4">
+    <nav className="flex items-center justify-between p-4 md:w-1/2 mx-auto">
       <Link href="/">
         <button className=" text-teal-50 font-bold"> braindump</button>
       </Link>

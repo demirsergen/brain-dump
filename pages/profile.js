@@ -60,7 +60,7 @@ const Profile = () => {
   }, [user, loading]);
 
   return (
-    <div className="shadow p-2 my-4  bg-slate-600 rounded ">
+    <div className="shadow p-2 my-4  bg-slate-600 rounded md:w-1/2 mx-auto">
       <div className="flex items-center gap-2 border-b-2 pb-2">
         <Image
           src={user?.photoURL}
