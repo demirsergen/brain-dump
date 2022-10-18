@@ -28,7 +28,7 @@ const Login = () => {
   }, [user]);
 
   return (
-    <div className=" shadow bg-slate-600 mt-16 p-10 text-gray-700 ">
+    <div className=" shadow bg-slate-600 mt-16 p-10 text-gray-700 md:w-1/3 mx-auto rounded">
       <h1 className="text-2xl font-medium text-center text-teal-50">Login</h1>
       <div className="py-4 mx-auto text-center">
         <button

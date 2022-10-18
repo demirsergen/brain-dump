@@ -83,7 +83,7 @@ const Addpost = () => {
   return (
     <div className="my-4 py-4 bg-slate-600 rounded md:w-1/2 mx-auto">
       <h1 className="text-teal-50 text-center uppercase font-bold">
-        {routerData.id ? "Update Your Dump" : "Share a new Dump"}
+        {routerData.id ? "Update Your Idea" : "Share a new Idea"}
       </h1>
       <form
         className="px-2"
@@ -91,7 +91,7 @@ const Addpost = () => {
       >
         <div className="p-2 rounded">
           <label htmlFor="dump" className="text-teal-50">
-            Dumpland:
+            Dump your idea:
           </label>
           <br />
           <textarea
