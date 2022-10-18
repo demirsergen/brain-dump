@@ -27,7 +27,7 @@ const Navbar = () => {
               alt="Picture of the profil owner"
               width={30}
               height={30}
-              className="rounded-full"
+              className="rounded-full cursor-pointer"
             />
           </Link>
         </ul>

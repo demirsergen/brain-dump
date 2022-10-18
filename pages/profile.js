@@ -5,6 +5,7 @@ import Link from "next/link";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Modal from "../components/Modal";
 import {
   collection,
   query,
@@ -20,6 +21,8 @@ import { AiFillEdit } from "react-icons/ai";
 const Profile = () => {
   const [user, loading] = useAuthState(auth);
   const [userDumps, setUserDumps] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [deleteId, setDeleteId] = useState();
   const router = useRouter();
 
   const signout = async () => {
@@ -51,13 +54,22 @@ const Profile = () => {
     await deleteDoc(dumpRef);
   };
 
-  const editPost = async (id) => {
-    const dumpRef = doc(db, "dumps", id);
-  };
-
   useEffect(() => {
     getDumps();
   }, [user, loading]);
+
+  const handleModal = (selection, id) => {
+    if (selection === "delete") {
+      setShowModal(false);
+      deleteDump(id);
+    } else {
+      setShowModal(false);
+    }
+  };
+
+  if (showModal) {
+    return <Modal handleModal={handleModal} deleteId={deleteId} />;
+  }
 
   return (
     <div className="shadow p-2 my-4  bg-slate-600 rounded md:w-1/2 mx-auto">
@@ -80,21 +92,24 @@ const Profile = () => {
         </Link>
       </div>
       <div className="p-2 shadow rounded my-2">
-        <h1 className="text-teal-50">My Dumps</h1>
+        <h1 className="text-teal-50 text-center font-bold">My Dumps</h1>
         {userDumps.map((dump) => {
           return (
             <div key={dump.id} className="bg-slate-500 rounded pb-2">
               <Dump dump={dump} />
               <div className="flex items-center gap-2 px-2">
                 <button
-                  className="flex items-center gap-2 text-red-500 font-bold bg-teal-50 rounded p-1"
-                  onClick={() => deleteDump(dump.id)}
+                  className="flex items-center gap-2 text-red-500 font-medium bg-teal-50 rounded p-1"
+                  onClick={() => {
+                    setShowModal(true);
+                    setDeleteId(dump.id);
+                  }}
                 >
                   <BsFillTrashFill />
                   Delete
                 </button>
                 <Link href={{ pathname: "/addpost", query: dump }}>
-                  <button className="flex items-center gap-2 text-teal-500 font-bold bg-teal-50 rounded p-1">
+                  <button className="flex items-center gap-2 text-teal-500 font-medium bg-teal-50 rounded p-1">
                     <AiFillEdit />
                     Edit
                   </button>

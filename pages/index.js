@@ -42,3 +42,6 @@ export default function Home() {
     </div>
   );
 }
+
+// ideas generating AI
+// people vote for the best but can also submit their own.
