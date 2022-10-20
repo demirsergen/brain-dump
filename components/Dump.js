@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Dump = ({ dump }) => {
-  const date = dump.timestamp.toDate();
+  const date = dump?.timestamp.toDate().toDateString();
   return (
     <div className="bg-slate-500 my-2 rounded p-2 grow">
       <div className="flex gap-2">
@@ -24,7 +24,7 @@ const Dump = ({ dump }) => {
       <div className="flex items-center justify-between">
         <span className="text-teal-50">#{dump.tag}</span>
         <div className="flex flex-col items-end">
-          <span className="text-teal-50">{date.toDateString()}</span>
+          <span className="text-teal-50">{date}</span>
           <span className="text-teal-50 underline">
             {dump.updated ? "Edited" : null}
           </span>

@@ -93,7 +93,7 @@ const Profile = () => {
       </div>
       <div className="p-2 shadow rounded my-2">
         <h1 className="text-teal-50 text-center font-bold">My Dumps</h1>
-        {userDumps.map((dump) => {
+        {userDumps?.map((dump) => {
           return (
             <div key={dump.id} className="bg-slate-500 rounded pb-2">
               <Dump dump={dump} />
