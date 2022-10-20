@@ -3,7 +3,7 @@ import Dump from "../components/Dump";
 import { useState, useEffect } from "react";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
-import Likes from "../components/Likes";
+import Votes from "../components/Votes";
 
 export default function Home() {
   const [allDumps, setAllDumps] = useState();
@@ -34,7 +34,7 @@ export default function Home() {
         <h1 className="text-teal-50 text-center font-bold">Latest Dumps</h1>
         {allDumps?.map((dump) => (
           <div key={dump.id} className="flex">
-            <Likes likes={dump.likes} id={dump.id} />
+            <Votes votes={dump.likes} id={dump.id} dump={dump} />
             <Dump dump={dump} />
           </div>
         ))}

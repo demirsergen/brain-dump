@@ -33,7 +33,7 @@ const Navbar = () => {
         </ul>
       ) : (
         <ul>
-          <Link href="/auth/login">
+          <Link href="/auth/signup">
             <button className=" px-4 py-2 bg-teal-500 rounded text-sm text-teal-50">
               Join Us
             </button>
