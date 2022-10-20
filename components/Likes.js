@@ -4,7 +4,6 @@ import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { db } from "../firebase";
 
 const Likes = ({ likes, id }) => {
-  // Disable or toggle like button after voting
   const [currentLikes, setCurrentLikes] = useState(likes);
   const [upVoted, setUpVoted] = useState(false);
   const [downVoted, setDownVoted] = useState(false);
