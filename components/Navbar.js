@@ -4,6 +4,7 @@ import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { MdAdd } from "react-icons/md";
 import Image from "next/image";
+import defaultAvatar from "../public/default-avatar.svg";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
@@ -23,7 +24,7 @@ const Navbar = () => {
           </Link>
           <Link href="/profile">
             <Image
-              src={user?.photoURL}
+              src={user?.photoURL || defaultAvatar}
               alt="Picture of the profil owner"
               width={30}
               height={30}

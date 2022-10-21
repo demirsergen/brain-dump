@@ -17,6 +17,7 @@ import {
 import Dump from "../components/Dump";
 import { BsFillTrashFill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
+import defaultAvatar from "../public/default-avatar.svg";
 
 const Profile = () => {
   const [user, loading] = useAuthState(auth);
@@ -75,13 +76,13 @@ const Profile = () => {
     <div className="shadow p-2 my-4  bg-slate-600 rounded md:w-1/2 mx-auto">
       <div className="flex items-center gap-2 border-b-2 pb-2">
         <Image
-          src={user?.photoURL}
+          src={user?.photoURL || defaultAvatar}
           alt="Picture of the profil owner"
           width={30}
           height={30}
           className="rounded-full"
         />
-        <h1 className="text-teal-50">{user?.displayName}</h1>
+        <h1 className="text-teal-50">{user?.displayName || user?.email}</h1>
         <Link href="/auth/login">
           <button
             onClick={signout}

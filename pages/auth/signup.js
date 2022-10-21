@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { BsGoogle } from "react-icons/bs";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../firebase";
 import { useRouter } from "next/router";
 
@@ -19,9 +23,23 @@ const Signup = () => {
     setSignupForm({ ...signupForm, [e.target.name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log(signupForm);
+    await createUserWithEmailAndPassword(
+      auth,
+      signupForm.email,
+      signupForm.password
+    )
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        router.push("/profile");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
 
   const login = async () => {
@@ -36,11 +54,11 @@ const Signup = () => {
     <div className="shadow bg-slate-600 mt-16 p-4 sm:w-full md:w-1/3 mx-auto rounded">
       <h1 className="text-2xl font-medium text-center text-teal-50 ">Signup</h1>
       <form
-        onSubmit={handleSubmit}
-        className="shadow bg-slate-500 mt-4 p-8 text-gray-700 md:w-1/3 mx-auto rounded"
+        onSubmit={handleSignup}
+        className="shadow bg-slate-500 mt-4 p-4 text-gray-700 mx-auto rounded"
       >
-        <div className="py-4 mx-auto text-center flex items-center justify-between">
-          <label htmlFor="email" className="text-teal-50">
+        <div className="py-4 mx-auto text-center flex items-center justify-between gap-12">
+          <label htmlFor="email" className="text-teal-50 font-medium">
             Email:
           </label>
           <input
@@ -48,9 +66,10 @@ const Signup = () => {
             name="email"
             value={signupForm.email}
             onChange={handleChange}
+            className="w-full rounded text-sm p-1"
           />
         </div>
-        <div className="py-4 mx-auto text-center flex items-center justify-between">
+        <div className="py-4 mx-auto text-center flex items-center justify-between gap-4">
           <label htmlFor="password" className="text-teal-50">
             Password:
           </label>
@@ -59,10 +78,13 @@ const Signup = () => {
             name="password"
             value={signupForm.password}
             onChange={handleChange}
-            className=""
+            className="w-full rounded text-sm p-1"
           />
         </div>
-        <button className="text-teal-50 bg-teal-500 p-2 block mx-auto rounded w-full">
+        <button
+          className="text-teal-50 bg-teal-500 p-2 block mx-auto rounded w-full"
+          onClick={handleSignup}
+        >
           Sign up
         </button>
       </form>

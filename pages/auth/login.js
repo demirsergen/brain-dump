@@ -1,21 +1,26 @@
 import { BsGoogle } from "react-icons/bs";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../firebase";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import NoteForLogin from "../../components/NoteForLogin";
 
 const Login = () => {
   const [user, loading] = useAuthState(auth);
-  const [signupForm, setSignupForm] = useState({
+  const [signinForm, setSigninForm] = useState({
     email: "",
     password: "",
   });
   const provider = new GoogleAuthProvider();
   const route = useRouter();
 
-  const login = async () => {
+  const loginWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       route.push("/profile");
@@ -24,18 +29,34 @@ const Login = () => {
     }
   };
 
-  const handleLogin = () => {};
+  const loginWithEmailAndPassword = async (e) => {
+    e.preventDefault();
+    console.log(signinForm);
+    await signInWithEmailAndPassword(
+      auth,
+      signinForm.email,
+      signinForm.password
+    )
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user, "function ran!");
+        route.push("/profile");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setSignupForm({ ...signupForm, [e.target.name]: value });
+    setSigninForm({ ...signinForm, [e.target.name]: value });
   };
 
   useEffect(() => {
     if (user) {
       route.push("/profile");
-    } else {
-      console.log("user changed.");
     }
   }, [user]);
 
@@ -43,30 +64,31 @@ const Login = () => {
     <div className="shadow bg-slate-600 mt-16 p-4 sm:w-full md:w-1/3 mx-auto rounded">
       <h1 className="text-2xl font-medium text-center text-teal-50">Login</h1>
       <form
-        onSubmit={handleLogin}
-        className="shadow bg-slate-500 mt-4 p-8 w-full md:w-1/3 mx-auto rounded"
+        onSubmit={loginWithEmailAndPassword}
+        className="shadow bg-slate-500 mt-4 p-4 w-full mx-auto rounded"
       >
-        <div className="py-4 mx-auto text-center flex items-center justify-between">
+        <div className="py-4 mx-auto text-center flex items-center justify-between gap-12">
           <label htmlFor="email" className="text-teal-50">
             Email:
           </label>
           <input
             type="email"
             name="email"
-            value={signupForm.email}
+            value={signinForm.email}
             onChange={handleChange}
+            className="w-full rounded text-sm p-1"
           />
         </div>
-        <div className="py-4 mx-auto text-center flex items-center justify-between">
+        <div className="py-4 mx-auto text-center flex items-center justify-between gap-4">
           <label htmlFor="password" className="text-teal-50">
             Password:
           </label>
           <input
             type="password"
             name="password"
-            value={signupForm.password}
+            value={signinForm.password}
             onChange={handleChange}
-            className=""
+            className="w-full rounded text-sm p-1"
           />
         </div>
         <button className="text-teal-50 bg-teal-500 p-2 block mx-auto rounded w-full">
@@ -81,12 +103,13 @@ const Login = () => {
       <div className="py-4 mx-auto text-center">
         <button
           className="mx-auto p-2  bg-teal-500 rounded text-teal-50 flex items-center justify-center gap-2 text-center pointer w-full "
-          onClick={login}
+          onClick={loginWithGoogle}
         >
           <BsGoogle className="text-medium " />
           Continue with Google
         </button>
       </div>
+      <NoteForLogin />
     </div>
   );
 };

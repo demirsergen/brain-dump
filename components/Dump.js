@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import defaultAvatar from "../public/default-avatar.svg";
 
 const Dump = ({ dump }) => {
   const date = dump?.timestamp.toDate().toDateString();
@@ -9,14 +10,14 @@ const Dump = ({ dump }) => {
       <div className="flex gap-2">
         <Link href="/profile">
           <Image
-            src={dump?.avatar}
+            src={dump?.avatar || defaultAvatar}
             alt="avatar"
             width={20}
             height={20}
             className="rounded-full cursor-pointer"
           />
         </Link>
-        <h1 className="text-teal-50">{dump.username}</h1>
+        <h1 className="text-teal-50">{dump.username || "Anonymous"}</h1>
       </div>
       <div className="bg-gray-100 rounded p-2 my-2">
         <p>{dump.text}</p>
