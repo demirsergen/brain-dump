@@ -52,14 +52,14 @@ const Login = () => {
   }, [user]);
 
   return (
-    <div className="shadow bg-slate-600 mt-16 p-4 sm:w-full md:w-1/3 mx-auto rounded">
+    <div className="shadow bg-slate-600 mt-16 p-4 w-full sm:w-3/4 md:w-2/4 lg:w-1/3 mx-auto rounded">
       <h1 className="text-2xl font-medium text-center text-teal-50">Login</h1>
       <form
         onSubmit={loginWithEmailAndPassword}
         className="shadow bg-slate-500 mt-4 p-4 w-full mx-auto rounded"
       >
-        <div className="py-4 mx-auto text-center flex items-center justify-between gap-12">
-          <label htmlFor="email" className="text-teal-50">
+        <div className="py-4 mx-auto text-center flex items-center justify-between">
+          <label htmlFor="email" className="text-teal-50 text-sm">
             Email:
           </label>
           <input
@@ -67,11 +67,11 @@ const Login = () => {
             name="email"
             value={signinForm.email}
             onChange={handleChange}
-            className="w-full rounded text-sm p-1"
+            className="w-3/4 rounded text-sm p-1"
           />
         </div>
-        <div className="py-4 mx-auto text-center flex items-center justify-between gap-4">
-          <label htmlFor="password" className="text-teal-50">
+        <div className="py-4 mx-auto text-center flex items-center justify-between">
+          <label htmlFor="password" className="text-teal-50 text-sm">
             Password:
           </label>
           <input
@@ -79,7 +79,7 @@ const Login = () => {
             name="password"
             value={signinForm.password}
             onChange={handleChange}
-            className="w-full rounded text-sm p-1"
+            className="w-3/4 rounded text-sm p-1"
           />
         </div>
         <button className="text-teal-50 bg-teal-500 p-2 block mx-auto rounded w-full">
