@@ -97,7 +97,7 @@ const Signup = () => {
           />
         </div>
         <div className="py-2 mx-auto text-center">
-          <span className=" text-red-300">{error || userError.message}</span>
+          <span className=" text-red-300">{error || userError}</span>
         </div>
         <button
           className="text-teal-50 bg-teal-500 p-2 block mx-auto rounded w-full"

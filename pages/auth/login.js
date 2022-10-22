@@ -1,28 +1,33 @@
 import { BsGoogle } from "react-icons/bs";
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth, db } from "../../firebase";
+import { auth } from "../../firebase";
 import { useRouter } from "next/router";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import NoteForLogin from "../../components/NoteForLogin";
+import {
+  useSignInWithGoogle,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 
 const Login = () => {
-  const [user, loading] = useAuthState(auth);
   const [signinForm, setSigninForm] = useState({
     email: "",
     password: "",
   });
-  const provider = new GoogleAuthProvider();
+  const [loginError, setLoginError] = useState("");
+  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [
+    signInWithEmailAndPassword,
+    emailPasswordUser,
+    emailPasswordLoading,
+    emailPasswordError,
+  ] = useSignInWithEmailAndPassword(auth);
   const route = useRouter();
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = () => {
     try {
-      return signInWithPopup(auth, provider);
+      signInWithGoogle();
+      route.push("/profile");
     } catch (error) {
       console.error(error);
     }
@@ -30,26 +35,19 @@ const Login = () => {
 
   const loginWithEmailAndPassword = async (e) => {
     e.preventDefault();
-    await signInWithEmailAndPassword(
-      auth,
-      signinForm.email,
-      signinForm.password
-    ).catch((error) => {
-      const errorMessage = error.message;
-      console.log(errorMessage);
-    });
+    await signInWithEmailAndPassword(signinForm.email, signinForm.password)
+      .then(() => {
+        route.push("/profile");
+      })
+      .catch((error) => {
+        setLoginError(error.message);
+      });
   };
 
   const handleChange = (e) => {
     const value = e.target.value;
     setSigninForm({ ...signinForm, [e.target.name]: value });
   };
-
-  useEffect(() => {
-    if (user) {
-      route.push("/profile");
-    }
-  }, [user]);
 
   return (
     <div className="shadow bg-slate-600 mt-16 p-4 w-full sm:w-3/4 md:w-2/4 lg:w-1/3 mx-auto rounded">
@@ -81,6 +79,11 @@ const Login = () => {
             onChange={handleChange}
             className="w-3/4 rounded text-sm p-1"
           />
+        </div>
+        <div className="py-2 mx-auto">
+          <span className="text-center text-red-300 bg-black">
+            {loginError || emailPasswordError?.message}
+          </span>
         </div>
         <button className="text-teal-50 bg-teal-500 p-2 block mx-auto rounded w-full">
           Login
