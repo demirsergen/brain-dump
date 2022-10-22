@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
@@ -12,7 +12,7 @@ const Signup = () => {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
-  const [createUserWithEmailAndPassword, user, loading, userError] =
+  const [createUserWithEmailAndPassword, userCred, loading, userError] =
     useCreateUserWithEmailAndPassword(auth);
 
   const route = useRouter();
@@ -29,13 +29,6 @@ const Signup = () => {
       return;
     }
     await createUserWithEmailAndPassword(signupForm.email, signupForm.password)
-      .then((userCredential) => {
-        const userCollectionRef = collection(db, "users");
-        addDoc(userCollectionRef, {
-          userId: userCredential.user.uid,
-          email: userCredential.user.email,
-        });
-      })
       .then(() => {
         route.push("/profile");
       })
@@ -44,6 +37,16 @@ const Signup = () => {
         setError(errorMessage);
       });
   };
+
+  const createUserDocument = async (user) => {
+    await addDoc(collection(db, "users"), JSON.parse(JSON.stringify(user)));
+  };
+
+  useEffect(() => {
+    if (userCred) {
+      createUserDocument(userCred.user);
+    }
+  }, [userCred]);
 
   return (
     <div className="shadow bg-slate-600 mt-16 p-4 w-full sm:w-3/4 md:w-2/4 lg:w-1/3 mx-auto rounded">
