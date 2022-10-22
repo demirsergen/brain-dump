@@ -4,12 +4,13 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import NoteForLogin from "../../components/NoteForLogin";
+import { collection, addDoc } from "firebase/firestore";
 
 const Login = () => {
   const [user, loading] = useAuthState(auth);
@@ -22,8 +23,22 @@ const Login = () => {
 
   const loginWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      route.push("/profile");
+      await signInWithPopup(auth, provider)
+        .then((userCred) => {
+          const q = db
+            .collection("users")
+            .where("userId", "==", user.uid)
+            .get();
+          console.log(q);
+          // const usersCollectionRef = collection(db, "users");
+          // return addDoc(usersCollectionRef, {
+          //   email: userCred.user.email,
+          //   userId: userCred.user.uid,
+          // });
+        })
+        .then(() => {
+          route.push("/profile");
+        });
     } catch (error) {
       console.error(error);
     }
@@ -31,16 +46,12 @@ const Login = () => {
 
   const loginWithEmailAndPassword = async (e) => {
     e.preventDefault();
-    console.log(signinForm);
     await signInWithEmailAndPassword(
       auth,
       signinForm.email,
       signinForm.password
     )
       .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user, "function ran!");
         route.push("/profile");
       })
       .catch((error) => {

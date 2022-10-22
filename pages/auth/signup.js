@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { BsGoogle } from "react-icons/bs";
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../firebase";
 import { useRouter } from "next/router";
+import { addDoc, collection } from "firebase/firestore";
 
 const Signup = () => {
   const [signupForm, setSignupForm] = useState({
@@ -15,7 +11,6 @@ const Signup = () => {
     password: "",
   });
 
-  const provider = new GoogleAuthProvider();
   const route = useRouter();
 
   const handleChange = (e) => {
@@ -31,10 +26,14 @@ const Signup = () => {
       signupForm.password
     )
       .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        router.push("/profile");
+        const userCollectionRef = collection(db, "users");
+        addDoc(userCollectionRef, {
+          userId: userCredential.user.uid,
+          email: userCredential.user.email,
+        });
+      })
+      .then(() => {
+        route.push("/profile");
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -42,14 +41,6 @@ const Signup = () => {
       });
   };
 
-  const login = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      route.push("/profile");
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <div className="shadow bg-slate-600 mt-16 p-4 sm:w-full md:w-1/3 mx-auto rounded">
       <h1 className="text-2xl font-medium text-center text-teal-50 ">Signup</h1>
@@ -93,15 +84,6 @@ const Signup = () => {
           Already have an account?
         </button>
       </Link>
-      <div className="py-4 mx-auto text-center">
-        <button
-          className="mx-auto p-2  bg-teal-500 rounded text-teal-50 flex items-center justify-center gap-2 text-center pointer w-full "
-          onClick={login}
-        >
-          <BsGoogle className="text-medium " />
-          Continue with Google
-        </button>
-      </div>
     </div>
   );
 };
