@@ -10,7 +10,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import NoteForLogin from "../../components/NoteForLogin";
-import { collection, addDoc } from "firebase/firestore";
 
 const Login = () => {
   const [user, loading] = useAuthState(auth);
@@ -23,22 +22,7 @@ const Login = () => {
 
   const loginWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, provider)
-        .then((userCred) => {
-          const q = db
-            .collection("users")
-            .where("userId", "==", user.uid)
-            .get();
-          console.log(q);
-          // const usersCollectionRef = collection(db, "users");
-          // return addDoc(usersCollectionRef, {
-          //   email: userCred.user.email,
-          //   userId: userCred.user.uid,
-          // });
-        })
-        .then(() => {
-          route.push("/profile");
-        });
+      return signInWithPopup(auth, provider);
     } catch (error) {
       console.error(error);
     }
@@ -50,14 +34,10 @@ const Login = () => {
       auth,
       signinForm.email,
       signinForm.password
-    )
-      .then((userCredential) => {
-        route.push("/profile");
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      });
+    ).catch((error) => {
+      const errorMessage = error.message;
+      console.log(errorMessage);
+    });
   };
 
   const handleChange = (e) => {
