@@ -43,7 +43,8 @@ const Addpost = () => {
       userId: user.uid,
       username: user.displayName,
       avatar: user.photoURL,
-      likes: 0,
+      voteCount: 0,
+      postVotes: [],
     });
 
     setDump({

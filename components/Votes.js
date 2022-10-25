@@ -1,41 +1,15 @@
-import { doc, updateDoc } from "firebase/firestore";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
-import { db } from "../firebase";
+import { auth } from "../firebase";
 
-const Votes = ({ votes, id, dump }) => {
-  const [currentVotes, setCurrentVotes] = useState(votes);
-  const [upVoted, setUpVoted] = useState(false);
-  const [downVoted, setDownVoted] = useState(false);
+const Votes = ({ currentVoteCount, id, dump, onVote }) => {
+  const [currentVotes, setCurrentVotes] = useState(currentVoteCount);
+  const [user] = useAuthState(auth);
 
-  // Firebase should know users who upvoted or downvoted;
-  // each post should have upvoted and downvoted collection
-  // dump => upvotes => user.id
-  // dump => downvotes => user.id
-
-  const updateVotes = async () => {
-    const dumpRef = doc(db, "dumps", id);
-
-    await updateDoc(dumpRef, {
-      votes: currentVotes,
-      upVoted,
-      downVoted,
-    });
-  };
-
-  useEffect(() => {
-    updateVotes();
-  }, [currentVotes, upVoted, downVoted]);
   return (
     <div className="flex flex-col items-center justify-center p-2 gap-2 text-teal-50">
-      <button
-        onClick={() => {
-          if (upVoted) return;
-          setCurrentVotes((prev) => prev + 1);
-          setUpVoted(true);
-          setDownVoted(false);
-        }}
-      >
+      <button onClick={() => onVote(dump.id, 1, user.uid)}>
         <AiOutlineArrowUp />
       </button>
       <span
@@ -49,14 +23,7 @@ const Votes = ({ votes, id, dump }) => {
       >
         {currentVotes}
       </span>
-      <button
-        onClick={() => {
-          if (downVoted) return;
-          setCurrentVotes((prev) => prev - 1);
-          setDownVoted(true);
-          setUpVoted(false);
-        }}
-      >
+      <button onClick={() => onVote(dump.id, -1, user.uid)}>
         <AiOutlineArrowDown />
       </button>
     </div>
