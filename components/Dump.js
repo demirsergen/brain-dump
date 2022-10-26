@@ -7,7 +7,7 @@ const Dump = ({ dump }) => {
   return (
     <div className="bg-slate-500 my-2 rounded p-2 grow">
       <div className="flex gap-2">
-        <Link href="/profile">
+        <Link href={`/${dump.userId}`}>
           <Image
             src={dump?.avatar || defaultAvatar}
             alt="avatar"

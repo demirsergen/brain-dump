@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { addDoc, collection } from "firebase/firestore";
 
 const Signup = () => {
@@ -22,20 +22,17 @@ const Signup = () => {
     setSignupForm({ ...signupForm, [e.target.name]: value });
   };
 
-  const handleSignup = async (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
     if (signupForm.password !== signupForm.confirmPassword) {
       setError("Passwords do not match!");
       return;
     }
-    await createUserWithEmailAndPassword(signupForm.email, signupForm.password)
-      .then(() => {
+    createUserWithEmailAndPassword(signupForm.email, signupForm.password).then(
+      () => {
         route.push("/profile");
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
+      }
+    );
   };
 
   const createUserDocument = async (user) => {
