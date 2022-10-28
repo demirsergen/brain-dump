@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
 import Router, { useRouter } from "next/router";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 
 const Signup = () => {
   const [signupForm, setSignupForm] = useState({
@@ -36,7 +36,7 @@ const Signup = () => {
   };
 
   const createUserDocument = async (user) => {
-    await addDoc(collection(db, "users"), JSON.parse(JSON.stringify(user)));
+    await setDoc(doc(db, "users", user.uid), JSON.parse(JSON.stringify(user)));
   };
 
   useEffect(() => {

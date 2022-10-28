@@ -60,7 +60,6 @@ const Login = () => {
   useEffect(() => {
     if (userCred) {
       createUserDocument(userCred.user);
-      console.log(userCred.user);
     }
   }, [userCred]);
 

@@ -17,13 +17,12 @@ const UserProfile = () => {
     const userRef = doc(db, "users", userId);
     const userDoc = await getDoc(userRef);
     const userInfo = userDoc.data();
-    console.log(userInfo);
 
     setUserProfile(userInfo);
   };
 
   useEffect(() => {
-    if (user.uid === userId) {
+    if (user?.uid === userId) {
       router.push("/profile");
     }
   });
