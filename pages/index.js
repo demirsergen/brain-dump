@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Dump from "../components/Dump";
+import Post from "../components/Post";
 import { useState, useEffect } from "react";
 import {
   collection,
@@ -17,24 +17,24 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Home() {
   const [user] = useAuthState(auth);
-  const [allDumps, setAllDumps] = useState();
+  const [allPosts, setAllPosts] = useState();
 
-  const getAllData = async () => {
-    const dumpCollectionRef = collection(db, "dumps");
-    const q = query(dumpCollectionRef, orderBy("timestamp", "desc"));
+  const getAllPosts = async () => {
+    const postCollectionRef = collection(db, "posts");
+    const q = query(postCollectionRef, orderBy("timestamp", "desc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      setAllDumps(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setAllPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
 
     return unsubscribe;
   };
 
   useEffect(() => {
-    getAllData();
+    getAllPosts();
   }, []);
 
   const onVote = async (postId, vote, userId) => {
-    const postRef = doc(db, "dumps", postId);
+    const postRef = doc(db, "posts", postId);
     const document = await getDoc(postRef);
     const documentData = document.data();
     const { voteCount, postVotes } = documentData;
@@ -62,15 +62,15 @@ export default function Home() {
 
       <div className="bg-slate-600 rounded p-2">
         <h1 className="text-teal-50 text-center font-bold">Latest Posts</h1>
-        {allDumps?.map((dump) => (
-          <div key={dump.id} className="flex">
+        {allPosts?.map((post) => (
+          <div key={post.id} className="flex">
             <Votes
-              currentVoteCount={dump.voteCount}
-              id={dump.id}
-              dump={dump}
+              currentVoteCount={post.voteCount}
+              id={post.id}
+              post={post}
               onVote={onVote}
             />
-            <Dump dump={dump} />
+            <Post post={post} />
           </div>
         ))}
       </div>

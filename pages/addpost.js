@@ -12,7 +12,7 @@ import {
 
 const Addpost = () => {
   const [user, loading] = useAuthState(auth);
-  const [dump, setDump] = useState({
+  const [post, setPost] = useState({
     text: "",
     tag: "",
   });
@@ -28,17 +28,17 @@ const Addpost = () => {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setDump({
-      ...dump,
+    setPost({
+      ...post,
       [e.target.name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const dumpCollectionRef = collection(db, "dumps");
-    await addDoc(dumpCollectionRef, {
-      ...dump,
+    const postCollectionRef = collection(db, "posts");
+    await addDoc(postCollectionRef, {
+      ...post,
       timestamp: serverTimestamp(),
       userId: user.uid,
       username: user.displayName,
@@ -47,7 +47,7 @@ const Addpost = () => {
       postVotes: [],
     });
 
-    setDump({
+    setPost({
       text: "",
       tag: "",
     });
@@ -57,7 +57,7 @@ const Addpost = () => {
 
   const checkForEdit = () => {
     if (routerData.id) {
-      setDump({
+      setPost({
         text: routerData.text,
         id: routerData.id,
         tag: routerData.tag,
@@ -71,10 +71,10 @@ const Addpost = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const dumpRef = doc(db, "dumps", routerData.id);
-    await updateDoc(dumpRef, {
-      text: dump.text,
-      tag: dump.tag,
+    const postRef = doc(db, "posts", routerData.id);
+    await updateDoc(postRef, {
+      text: post.text,
+      tag: post.tag,
       updated: true,
     });
 
@@ -91,8 +91,8 @@ const Addpost = () => {
         onSubmit={routerData.id ? handleUpdate : handleSubmit}
       >
         <div className="p-2 rounded">
-          <label htmlFor="dump" className="text-teal-50">
-            Dump your idea:
+          <label htmlFor="post" className="text-teal-50">
+            Post your idea:
           </label>
           <br />
           <textarea
@@ -101,7 +101,7 @@ const Addpost = () => {
             rows="7"
             className="w-full bg-gray-100 p-2 rounded "
             placeholder="Let your mind speak..."
-            value={dump.text}
+            value={post.text}
             onChange={handleChange}
             required
           ></textarea>
@@ -116,7 +116,7 @@ const Addpost = () => {
             name="tag"
             className="w-full bg-gray-100 p-2 rounded"
             placeholder="daily, friendship, tech?"
-            value={dump.tag}
+            value={post.tag}
             onChange={handleChange}
           />
         </div>

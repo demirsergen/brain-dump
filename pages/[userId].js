@@ -13,7 +13,7 @@ import {
 import Image from "next/image";
 import defaultAvatar from "../public/default-avatar.svg";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Dump from "../components/Dump";
+import Post from "../components/Post";
 
 const UserProfile = () => {
   const [user, loading] = useAuthState(auth);
@@ -25,7 +25,7 @@ const UserProfile = () => {
     if (loading) return;
     if (!user) return router.push("/auth/login");
 
-    const postsRef = collection(db, "dumps");
+    const postsRef = collection(db, "posts");
     const q = query(postsRef, where("userId", "==", userId));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -50,7 +50,7 @@ const UserProfile = () => {
       <h1 className="text-teal-50 text-center">Posts</h1>
       <div>
         {userPosts.map((post) => {
-          return <Dump key={post.id} dump={post} />;
+          return <Post key={post.id} post={post} />;
         })}
       </div>
     </div>
