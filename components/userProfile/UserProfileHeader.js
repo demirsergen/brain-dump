@@ -18,7 +18,6 @@ const UserProfileHeader = () => {
 
   useEffect(() => {
     getUpdatedUserInfo();
-    console.log(currentUser);
   }, [user]);
 
   return (
