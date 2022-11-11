@@ -1,17 +1,26 @@
-import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../firebase";
-import { doc, updateDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, db } from '../firebase';
+import {
+  doc,
+  updateDoc,
+  runTransaction,
+  getDocs,
+  query,
+  where,
+  collection,
+} from 'firebase/firestore';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 const UpdateProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [file, setFile] = useState();
-  const [username, setUsername] = useState("");
-  const [message, setMessage] = useState("");
+  const [fullname, setFullname] = useState('');
+  const [username, setUsername] = useState('');
+  const [message, setMessage] = useState('');
+  const [userPosts, setUserPosts] = useState();
 
   const storage = getStorage();
-  console.log(file);
 
   const uploadAvatar = async (e) => {
     e.preventDefault();
@@ -19,7 +28,7 @@ const UpdateProfile = () => {
     try {
       await uploadBytes(photosRef, file)
         .then((snapshot) => {
-          setMessage("Upload successful!");
+          setMessage('Upload successful!');
         })
         .catch((error) => {
           console.error(error);
@@ -30,14 +39,26 @@ const UpdateProfile = () => {
   };
   const updateInfo = async (e) => {
     e.preventDefault();
-    setMessage("");
-    const docRef = doc(db, "users", user.uid);
+    setMessage('');
+    const userRef = doc(db, 'users', user.uid);
     const data = {
+      displayName: fullname,
       username: username,
     };
-    await updateDoc(docRef, data)
-      .then((docRef) => {
+    // UPDATE POSTS AS WELL FOR THE SAME INFO --
+    // const postsRef = collection(db, 'posts');
+    // const q = query(postsRef, where('userId', '==', user.uid));
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => {
+    //   setUserPosts(doc.data());
+    //   console.log(userPosts);
+    // });
+
+    await updateDoc(userRef, data)
+      .then((userRef) => {
         setMessage("You've successfully updated your info!");
+        setUsername('');
+        setFullname('');
       })
       .catch((err) => {
         console.error(err);
@@ -59,6 +80,18 @@ const UpdateProfile = () => {
             placeholder="Username"
             className="w-full bg-gray-100 p-2 rounded "
             onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="p-2 rounded">
+          <label className="text-teal-50">Fullname:</label>
+          <br />
+          <input
+            type="text"
+            value={fullname}
+            name="fullname"
+            placeholder="Fullname"
+            className="w-full bg-gray-100 p-2 rounded "
+            onChange={(e) => setFullname(e.target.value)}
           />
         </div>
         <button

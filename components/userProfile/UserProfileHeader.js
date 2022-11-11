@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { auth, db } from "../../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import defaultAvatar from "../../public/default-avatar.svg";
-import UserProfileHeaderButtons from "./UserProfileHeaderButtons";
-import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { auth, db } from '../../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import defaultAvatar from '../../public/default-avatar.svg';
+import UserProfileHeaderButtons from './UserProfileHeaderButtons';
+import { doc, getDoc } from 'firebase/firestore';
 
 const UserProfileHeader = () => {
   const [user, loading] = useAuthState(auth);
   const [currentUser, setCurrentUser] = useState();
 
   const getUpdatedUserInfo = async () => {
-    const docRef = doc(db, "users", user.uid);
+    const docRef = doc(db, 'users', user?.uid);
     const data = await getDoc(docRef);
     setCurrentUser(data.data());
   };

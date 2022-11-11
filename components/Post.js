@@ -1,7 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import defaultAvatar from "../public/default-avatar.svg";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import defaultAvatar from '../public/default-avatar.svg';
 
 const Post = ({ post }) => {
   return (
@@ -16,7 +16,9 @@ const Post = ({ post }) => {
             className="rounded-full cursor-pointer"
           />
         </Link>
-        <h1 className="text-teal-50">{post.username || "Anonymous"}</h1>
+        <h1 className="text-teal-50">
+          {post.username || 'Anonymous'}
+        </h1>
       </div>
       <div className="bg-gray-100 rounded p-2 my-2">
         <p>{post.text}</p>
@@ -28,7 +30,7 @@ const Post = ({ post }) => {
             {post?.timestamp?.toDate().toDateString()}
           </span>
           <span className="text-teal-50 underline">
-            {post.updated ? "Edited" : null}
+            {post.updated ? 'Edited' : null}
           </span>
         </div>
       </div>
