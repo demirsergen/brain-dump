@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth, db } from "../../firebase";
-import Router, { useRouter } from "next/router";
-import { addDoc, collection, setDoc, doc } from "firebase/firestore";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { auth, db } from '../../firebase';
+import { useRouter } from 'next/router';
+import { setDoc, doc } from 'firebase/firestore';
 
 const Signup = () => {
   const [signupForm, setSignupForm] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
-  const [error, setError] = useState("");
-  const [createUserWithEmailAndPassword, userCred, loading, userError] =
-    useCreateUserWithEmailAndPassword(auth);
+  const [error, setError] = useState('');
+  const [
+    createUserWithEmailAndPassword,
+    userCred,
+    loading,
+    userError,
+  ] = useCreateUserWithEmailAndPassword(auth);
 
   const route = useRouter();
 
@@ -25,18 +29,22 @@ const Signup = () => {
   const handleSignup = (e) => {
     e.preventDefault();
     if (signupForm.password !== signupForm.confirmPassword) {
-      setError("Passwords do not match!");
+      setError('Passwords do not match!');
       return;
     }
-    createUserWithEmailAndPassword(signupForm.email, signupForm.password).then(
-      () => {
-        route.push("/profile");
-      }
-    );
+    createUserWithEmailAndPassword(
+      signupForm.email,
+      signupForm.password
+    ).then(() => {
+      route.push('/profile');
+    });
   };
 
   const createUserDocument = async (user) => {
-    await setDoc(doc(db, "users", user.uid), JSON.parse(JSON.stringify(user)));
+    await setDoc(
+      doc(db, 'users', user.uid),
+      JSON.parse(JSON.stringify(user))
+    );
   };
 
   useEffect(() => {
@@ -83,7 +91,10 @@ const Signup = () => {
           />
         </div>
         <div className="py-4 mx-auto text-center flex items-center justify-between">
-          <label htmlFor="confirmPassword" className="text-teal-50 text-sm">
+          <label
+            htmlFor="confirmPassword"
+            className="text-teal-50 text-sm"
+          >
             Password:
           </label>
           <input
