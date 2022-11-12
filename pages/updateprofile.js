@@ -33,26 +33,32 @@ const UpdateProfile = () => {
           setMessage('Upload successful!');
         })
         .catch((error) => {
-          console.error(error);
+          setMessage(error);
         });
-    } catch (e) {
-      console.log(e.message);
+    } catch (error) {
+      setMessage(error.message);
     }
   };
   const updateInfo = async (e) => {
     e.preventDefault();
     setMessage('');
     const userRef = doc(db, 'users', user.uid);
-    const data = {
-      displayName: fullname,
-      username: username,
-    };
-    batch.update(userRef, data);
+    if (username && fullname) {
+      batch.update(userRef, {
+        username: username,
+        displayName: fullname,
+      });
+    } else if (fullname && !username) {
+      batch.update(userRef, { displayName: fullname });
+    } else if (!fullname && username) {
+      batch.update(userRef, { username: username });
+    } else {
+      return;
+    }
 
-    // UPDATE POSTS AS WELL FOR THE SAME INFO --
-    const postsRef = collection(db, 'posts');
-    const q = query(postsRef, where('userId', '==', user.uid));
-    const querySnapshot = await getDocs(q);
+    // const postsRef = collection(db, 'posts');
+    // const q = query(postsRef, where('userId', '==', user.uid));
+    // const querySnapshot = await getDocs(q);
 
     // console.log(querySnapshot);
     // querySnapshot.forEach((doc) => {
@@ -69,16 +75,9 @@ const UpdateProfile = () => {
     // batch.update(querySnapshot, data);
 
     await batch.commit();
-
-    // await updateDoc(userRef, data)
-    //   .then((userRef) => {
-    //     setMessage("You've successfully updated your info!");
-    //     setUsername('');
-    //     setFullname('');
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+    setMessage("You've successfully updated your info!");
+    setUsername('');
+    setFullname('');
   };
   return (
     <div className="my-4 py-4 bg-slate-600 rounded md:w-1/2 mx-auto">
