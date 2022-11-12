@@ -9,6 +9,7 @@ import {
   query,
   where,
   collection,
+  writeBatch,
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
@@ -18,9 +19,10 @@ const UpdateProfile = () => {
   const [fullname, setFullname] = useState('');
   const [username, setUsername] = useState('');
   const [message, setMessage] = useState('');
-  const [userPosts, setUserPosts] = useState();
+  const [userPosts, setUserPosts] = useState([]);
 
   const storage = getStorage();
+  const batch = writeBatch(db);
 
   const uploadAvatar = async (e) => {
     e.preventDefault();
@@ -45,24 +47,38 @@ const UpdateProfile = () => {
       displayName: fullname,
       username: username,
     };
+    batch.update(userRef, data);
+
     // UPDATE POSTS AS WELL FOR THE SAME INFO --
-    // const postsRef = collection(db, 'posts');
-    // const q = query(postsRef, where('userId', '==', user.uid));
-    // const querySnapshot = await getDocs(q);
+    const postsRef = collection(db, 'posts');
+    const q = query(postsRef, where('userId', '==', user.uid));
+    const querySnapshot = await getDocs(q);
+
+    // console.log(querySnapshot);
     // querySnapshot.forEach((doc) => {
-    //   setUserPosts(doc.data());
-    //   console.log(userPosts);
+    //   // setUserPosts(doc.data());
+    //   console.log(doc.data());
+    // });
+    // console.log(userPosts);
+
+    // userPosts.forEach((doc) => {
+    //   const docRef = collection(db, 'posts', doc.id);
+    //   console.log(docRef);
     // });
 
-    await updateDoc(userRef, data)
-      .then((userRef) => {
-        setMessage("You've successfully updated your info!");
-        setUsername('');
-        setFullname('');
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // batch.update(querySnapshot, data);
+
+    await batch.commit();
+
+    // await updateDoc(userRef, data)
+    //   .then((userRef) => {
+    //     setMessage("You've successfully updated your info!");
+    //     setUsername('');
+    //     setFullname('');
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   };
   return (
     <div className="my-4 py-4 bg-slate-600 rounded md:w-1/2 mx-auto">
