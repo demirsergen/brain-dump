@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import defaultAvatar from '../public/default-avatar.svg';
+import { db } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Post = ({ post }) => {
+  const [userProfile, setUserProfile] = useState();
+
+  const getUserInfo = async () => {
+    const docRef = doc(db, 'users', post.userId);
+    const data = await getDoc(docRef);
+    setUserProfile(data.data());
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, [userProfile]);
   return (
     <div className="bg-slate-500 my-2 rounded p-2 grow">
       <div className="flex gap-2">
@@ -17,7 +30,9 @@ const Post = ({ post }) => {
           />
         </Link>
         <h1 className="text-teal-50">
-          {post.username || 'Anonymous'}
+          {userProfile?.username ||
+            userProfile?.displayName ||
+            'Anonymous'}
         </h1>
       </div>
       <div className="bg-gray-100 rounded p-2 my-2">

@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
-import {
-  doc,
-  updateDoc,
-  runTransaction,
-  getDocs,
-  query,
-  where,
-  collection,
-  writeBatch,
-} from 'firebase/firestore';
+import { doc, writeBatch } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 const UpdateProfile = () => {
@@ -19,7 +10,6 @@ const UpdateProfile = () => {
   const [fullname, setFullname] = useState('');
   const [username, setUsername] = useState('');
   const [message, setMessage] = useState('');
-  const [userPosts, setUserPosts] = useState([]);
 
   const storage = getStorage();
   const batch = writeBatch(db);
@@ -55,24 +45,6 @@ const UpdateProfile = () => {
     } else {
       return;
     }
-
-    // const postsRef = collection(db, 'posts');
-    // const q = query(postsRef, where('userId', '==', user.uid));
-    // const querySnapshot = await getDocs(q);
-
-    // console.log(querySnapshot);
-    // querySnapshot.forEach((doc) => {
-    //   // setUserPosts(doc.data());
-    //   console.log(doc.data());
-    // });
-    // console.log(userPosts);
-
-    // userPosts.forEach((doc) => {
-    //   const docRef = collection(db, 'posts', doc.id);
-    //   console.log(docRef);
-    // });
-
-    // batch.update(querySnapshot, data);
 
     await batch.commit();
     setMessage("You've successfully updated your info!");

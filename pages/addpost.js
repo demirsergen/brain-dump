@@ -1,20 +1,20 @@
-import { useRouter } from "next/router";
-import { auth, db } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useEffect, useState } from "react";
+import { useRouter } from 'next/router';
+import { auth, db } from '../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useEffect, useState } from 'react';
 import {
   addDoc,
   collection,
   serverTimestamp,
   updateDoc,
   doc,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 const Addpost = () => {
   const [user, loading] = useAuthState(auth);
   const [post, setPost] = useState({
-    text: "",
-    tag: "",
+    text: '',
+    tag: '',
   });
 
   const router = useRouter();
@@ -22,7 +22,7 @@ const Addpost = () => {
 
   useEffect(() => {
     if (!user) {
-      router.push("/auth/login");
+      router.push('/auth/login');
     }
   }, [user]);
 
@@ -36,23 +36,21 @@ const Addpost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const postCollectionRef = collection(db, "posts");
+    const postCollectionRef = collection(db, 'posts');
     await addDoc(postCollectionRef, {
       ...post,
       timestamp: serverTimestamp(),
       userId: user.uid,
-      username: user.displayName,
-      avatar: user.photoURL,
       voteCount: 0,
       postVotes: [],
     });
 
     setPost({
-      text: "",
-      tag: "",
+      text: '',
+      tag: '',
     });
 
-    router.push("/");
+    router.push('/');
   };
 
   const checkForEdit = () => {
@@ -71,20 +69,20 @@ const Addpost = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const postRef = doc(db, "posts", routerData.id);
+    const postRef = doc(db, 'posts', routerData.id);
     await updateDoc(postRef, {
       text: post.text,
       tag: post.tag,
       updated: true,
     });
 
-    router.push("/profile");
+    router.push('/profile');
   };
 
   return (
     <div className="my-4 py-4 bg-slate-600 rounded md:w-1/2 mx-auto">
       <h1 className="text-teal-50 text-center uppercase font-bold">
-        {routerData.id ? "Update Your Idea" : "Share a new Idea"}
+        {routerData.id ? 'Update Your Idea' : 'Share a new Idea'}
       </h1>
       <form
         className="px-2"
@@ -124,7 +122,7 @@ const Addpost = () => {
           type="submit"
           className="bg-teal-500 text-teal-50 w-full text-bold my-2 p-2 rounded block mx-auto"
         >
-          {routerData.id ? "Update" : "Share"}
+          {routerData.id ? 'Update' : 'Share'}
         </button>
       </form>
     </div>
