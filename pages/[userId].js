@@ -19,7 +19,6 @@ const UserProfile = () => {
   const router = useRouter();
   const { userId } = router.query;
 
-  console.log(userProfile);
   const getUserInfo = async () => {
     const docRef = doc(db, 'users', userId);
     const data = await getDoc(docRef);
@@ -46,7 +45,7 @@ const UserProfile = () => {
     if (user?.uid === userId) {
       router.push('/profile');
     }
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     getUserPosts();
