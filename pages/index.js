@@ -6,17 +6,11 @@ import {
   query,
   orderBy,
   onSnapshot,
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
 } from 'firebase/firestore';
-import { db, auth } from '../firebase';
+import { db } from '../firebase';
 import Votes from '../components/Votes';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function Home() {
-  const [user] = useAuthState(auth);
   const [allPosts, setAllPosts] = useState();
 
   const getAllPosts = async () => {
@@ -35,25 +29,6 @@ export default function Home() {
     getAllPosts();
   }, []);
 
-  const onVote = async (postId, vote, userId) => {
-    const postRef = doc(db, 'posts', postId);
-    const document = await getDoc(postRef);
-    const documentData = document.data();
-    const { voteCount, postVotes } = documentData;
-
-    const existingVote = documentData?.postVotes.find(
-      (vote) => vote.id !== userId
-    );
-    if (!existingVote) {
-      await updateDoc(postRef, {
-        voteCount: voteCount + vote,
-        postVotes: [...postVotes, userId],
-      });
-    } else {
-      // check if user removing existing upvote or downvote
-    }
-  };
-
   return (
     <div className="md:w-1/2 mx-auto">
       <Head>
@@ -71,12 +46,7 @@ export default function Home() {
         </h1>
         {allPosts?.map((post) => (
           <div key={post.id} className="flex">
-            <Votes
-              currentVoteCount={post.voteCount}
-              id={post.id}
-              post={post}
-              onVote={onVote}
-            />
+            <Votes post={post} />
             <Post post={post} />
           </div>
         ))}

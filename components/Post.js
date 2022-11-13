@@ -16,7 +16,7 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     getUserInfo();
-  }, [userProfile]);
+  }, []);
   return (
     <div className="bg-slate-500 my-2 rounded p-2 grow">
       <div className="flex gap-2">
