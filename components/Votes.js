@@ -15,6 +15,9 @@ const Votes = ({ post }) => {
     const documentData = document.data();
     const { postVotes } = documentData;
 
+    const existingVote = postVotes.includes(user.uid);
+    if (existingVote) setVoted(true);
+
     setVoteCount(postVotes.length);
   };
 
@@ -25,11 +28,12 @@ const Votes = ({ post }) => {
     const { postVotes } = documentData;
 
     const existingVote = postVotes.includes(userId);
+
     if (!existingVote) {
       await updateDoc(postRef, {
         postVotes: [...postVotes, userId],
       });
-      setVoted((prev) => !prev);
+      setVoted(true);
     } else {
       const newPostVotes = postVotes.filter(
         (vote) => vote !== userId
@@ -37,7 +41,7 @@ const Votes = ({ post }) => {
       await updateDoc(postRef, {
         postVotes: [...newPostVotes],
       });
-      setVoted((prev) => !prev);
+      setVoted(false);
     }
   };
 
@@ -46,7 +50,10 @@ const Votes = ({ post }) => {
   }, [voted]);
   return (
     <div className="flex flex-col items-center justify-center p-2 gap-2 text-teal-50">
-      <button onClick={() => onVote(post.id, user.uid)}>
+      <button
+        onClick={() => onVote(post.id, user.uid)}
+        className={voted ? 'text-green-400' : ''}
+      >
         <AiOutlineArrowUp size={20} />
       </button>
       <span
@@ -56,9 +63,6 @@ const Votes = ({ post }) => {
       >
         {voteCount}
       </span>
-      {/* <button onClick={() => onVote(post.id, -1, user.uid)}>
-        <AiOutlineArrowDown />
-      </button> */}
     </div>
   );
 };
