@@ -10,7 +10,7 @@ import {
   collection,
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import Post from '../components/Post';
+import Post from '../components/post/Post';
 
 const UserProfile = () => {
   const [user, loading] = useAuthState(auth);

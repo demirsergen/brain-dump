@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   collection,
   query,
@@ -6,15 +6,15 @@ import {
   onSnapshot,
   doc,
   deleteDoc,
-} from "firebase/firestore";
-import { auth, db } from "../../firebase";
-import { useRouter } from "next/router";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { BsFillTrashFill } from "react-icons/bs";
-import { AiFillEdit } from "react-icons/ai";
-import Post from "../Post";
-import Modal from "../Modal";
-import Link from "next/link";
+} from 'firebase/firestore';
+import { auth, db } from '../../firebase';
+import { useRouter } from 'next/router';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { BsFillTrashFill } from 'react-icons/bs';
+import { AiFillEdit } from 'react-icons/ai';
+import Post from '../post/Post';
+import Modal from '../Modal';
+import Link from 'next/link';
 
 const UserPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
@@ -26,20 +26,22 @@ const UserPosts = () => {
 
   const getUserPosts = async () => {
     if (loading) return;
-    if (!user) return router.push("/auth/login");
+    if (!user) return router.push('/auth/login');
 
-    const postsRef = collection(db, "posts");
-    const q = query(postsRef, where("userId", "==", user.uid));
+    const postsRef = collection(db, 'posts');
+    const q = query(postsRef, where('userId', '==', user.uid));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      setUserPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setUserPosts(
+        snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
     });
 
     return unsubscribe;
   };
 
   const deletePost = async (id) => {
-    const postRef = doc(db, "posts", id);
+    const postRef = doc(db, 'posts', id);
     await deleteDoc(postRef);
   };
 
@@ -48,7 +50,7 @@ const UserPosts = () => {
   }, [user, loading]);
 
   const handleModal = (selection, id) => {
-    if (selection === "delete") {
+    if (selection === 'delete') {
       setShowModal(false);
       deletePost(id);
     } else {
@@ -77,7 +79,7 @@ const UserPosts = () => {
                 <BsFillTrashFill />
                 Delete
               </button>
-              <Link href={{ pathname: "/addpost", query: post }}>
+              <Link href={{ pathname: '/addpost', query: post }}>
                 <button className="flex items-center gap-2 text-teal-500 font-medium bg-teal-50 rounded p-1">
                   <AiFillEdit />
                   Edit
