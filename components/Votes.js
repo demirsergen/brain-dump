@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+import { AiOutlineArrowUp } from 'react-icons/ai';
 import { auth, db } from '../firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
