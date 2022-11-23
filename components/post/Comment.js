@@ -1,31 +1,38 @@
-import React, { useState } from 'react';
-import { collection, query, onSnapshot } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase';
+import defaultAvatar from '../../public/default-avatar.svg';
+import { doc, getDoc } from 'firebase/firestore';
+import Image from 'next/image';
 
 const Comment = ({ comment }) => {
-  const [comments, setComments] = useState([]);
-  // TODOS
-  // get user by user id and add avatar to next to the comment
+  const [userInfo, setUserInfo] = useState();
+  const userId = comment.userId;
 
-  //   const getComments = () => {
-  //     const postCollectionRef = collection(db, 'posts');
-  //     const commentsRef = collection(postCollectionRef, 'comments');
-  //     const q = query(postCollectionRef, orderBy('timestamp', 'desc'));
-  //     const unsubscribe = onSnapshot(q, (snapshot) => {
-  //       setAllPosts(
-  //         snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-  //       );
-  //     });
-
-  //     return unsubscribe;
-  //   };
+  const getUserInfo = async () => {
+    const docRef = doc(db, 'users', userId);
+    const data = await getDoc(docRef);
+    setUserInfo(data.data());
+  };
 
   useEffect(() => {
-    getComments();
+    getUserInfo();
   }, []);
+
   return (
-    <div>
-      <p>{comment}</p>
+    <div className="p-1 bg-white my-1 ">
+      <div className="flex items-center border-b-2 py-1">
+        <Image
+          src={userInfo?.photoURL || defaultAvatar}
+          alt="avatar"
+          width={20}
+          height={20}
+          className="rounded-full cursor-pointer"
+        />
+        <span className="text-sm ml-1">
+          {userInfo?.username || 'anonymous'}
+        </span>
+      </div>
+      <p className="p-1">{comment.comment}</p>
     </div>
   );
 };
