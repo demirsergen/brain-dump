@@ -4,7 +4,8 @@ import Link from 'next/link';
 import defaultAvatar from '../../public/default-avatar.svg';
 import { db } from '../../firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import CommentButton from './CommentButton';
+import AddComment from './AddComment';
+import Comments from './Comments';
 
 const Post = ({ post }) => {
   const [userProfile, setUserProfile] = useState();
@@ -50,7 +51,8 @@ const Post = ({ post }) => {
           </span>
         </div>
       </div>
-      <CommentButton />
+      <AddComment post={post} />
+      <Comments />
     </div>
   );
 };
