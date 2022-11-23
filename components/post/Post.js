@@ -52,7 +52,7 @@ const Post = ({ post }) => {
         </div>
       </div>
       <AddComment post={post} />
-      <Comments />
+      <Comments post={post} />
     </div>
   );
 };
