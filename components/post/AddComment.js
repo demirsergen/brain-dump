@@ -34,7 +34,7 @@ const AddComment = ({ post }) => {
     setComment('');
   };
   return (
-    <form className="w-full flex bg-red-100 rounded">
+    <form className="w-full flex bg-red-100">
       <input
         type="text"
         name="comment"
@@ -44,7 +44,7 @@ const AddComment = ({ post }) => {
         className="p-1 rounded flex-1"
       />
       <button
-        className="bg-teal-500 rounded p-1 text-teal-50 text-sm"
+        className="bg-teal-500 p-1 text-teal-50 text-sm"
         onClick={submitComment}
       >
         Comment
