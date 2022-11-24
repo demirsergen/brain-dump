@@ -11,14 +11,16 @@ const UserProfileHeader = () => {
   const [currentUser, setCurrentUser] = useState();
 
   const getUpdatedUserInfo = async () => {
-    const docRef = doc(db, 'users', user?.uid);
-    const data = await getDoc(docRef);
-    setCurrentUser(data.data());
+    if (user) {
+      const docRef = doc(db, 'users', user?.uid);
+      const data = await getDoc(docRef);
+      setCurrentUser(data.data());
+    }
   };
 
   useEffect(() => {
     getUpdatedUserInfo();
-  }, [user]);
+  }, []);
 
   return (
     <div className="flex items-center gap-2 border-b-2 pb-2">

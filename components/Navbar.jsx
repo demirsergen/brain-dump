@@ -12,9 +12,11 @@ const Navbar = () => {
   const [currentUser, setCurrentUser] = useState();
 
   const getUpdatedUserInfo = async () => {
-    const docRef = doc(db, 'users', user?.uid);
-    const data = await getDoc(docRef);
-    setCurrentUser(data.data());
+    if (user) {
+      const docRef = doc(db, 'users', user?.uid);
+      const data = await getDoc(docRef);
+      setCurrentUser(data.data());
+    }
   };
 
   useEffect(() => {
