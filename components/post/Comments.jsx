@@ -23,7 +23,7 @@ const Comments = ({ post }) => {
   }, []);
 
   return (
-    <div className=" bg-gray-300">
+    <div className="bg-white my-1 rounded overflow-hidden">
       {comments?.map((comment, index) => (
         <Comment key={index} comment={comment} />
       ))}

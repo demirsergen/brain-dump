@@ -30,7 +30,9 @@ const UserProfileHeader = () => {
         className="rounded-full"
       />
       <h1 className="text-teal-50">
-        {currentUser?.username || currentUser?.email}
+        {currentUser?.displayName ||
+          currentUser?.username ||
+          currentUser?.email}
       </h1>
       <UserProfileHeaderButtons />
     </div>
