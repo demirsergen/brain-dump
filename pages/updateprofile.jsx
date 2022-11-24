@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
-import { doc, writeBatch } from 'firebase/firestore';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { doc, writeBatch, updateDoc } from 'firebase/firestore';
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from 'firebase/storage';
 
 const UpdateProfile = () => {
   const [user, loading] = useAuthState(auth);
@@ -10,13 +15,14 @@ const UpdateProfile = () => {
   const [fullname, setFullname] = useState('');
   const [username, setUsername] = useState('');
   const [message, setMessage] = useState('');
+  const [photoUrl, setPhotoUrl] = useState('');
 
   const storage = getStorage();
   const batch = writeBatch(db);
 
   const uploadAvatar = async (e) => {
     e.preventDefault();
-    const photosRef = ref(storage, `images/${user.uid}/${file.name}`);
+    const photosRef = ref(storage, `images/${user.uid}/avatar.png`);
     try {
       await uploadBytes(photosRef, file)
         .then((snapshot) => {
@@ -28,6 +34,7 @@ const UpdateProfile = () => {
     } catch (error) {
       setMessage(error.message);
     }
+    updateAvatar();
   };
   const updateInfo = async (e) => {
     e.preventDefault();
@@ -50,6 +57,21 @@ const UpdateProfile = () => {
     setMessage("You've successfully updated your info!");
     setUsername('');
     setFullname('');
+  };
+
+  const updateAvatar = async () => {
+    const photoRef = ref(storage, `images/${user.uid}/avatar.png`);
+    await getDownloadURL(photoRef).then((url) => {
+      setPhotoUrl(url);
+    });
+
+    if (photoRef) {
+      const userRef = doc(db, 'users', user.uid);
+
+      await updateDoc(userRef, {
+        photoURL: photoUrl,
+      });
+    }
   };
   return (
     <div className="my-4 py-4 bg-slate-600 rounded md:w-1/2 mx-auto">

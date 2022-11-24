@@ -20,8 +20,8 @@ const Comment = ({ comment }) => {
   }, []);
 
   return (
-    <div className="p-1 bg-white my-1 flex">
-      <div className="flex items-center p-1 border-r-2">
+    <div className="p-1 bg-white my-1">
+      <div className="flex items-center p-1 border-b-2">
         <Link href={`/${userId}`}>
           <Image
             src={userInfo?.photoURL || defaultAvatar}

@@ -24,7 +24,7 @@ const Post = ({ post }) => {
       <div className="flex gap-2">
         <Link href={`/${post.userId}`}>
           <Image
-            src={post?.avatar || defaultAvatar}
+            src={userProfile?.photoURL || defaultAvatar}
             alt="avatar"
             width={20}
             height={20}

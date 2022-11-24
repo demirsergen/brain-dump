@@ -1,30 +1,48 @@
-import Link from "next/link";
-import React from "react";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { MdAdd } from "react-icons/md";
-import Image from "next/image";
-import defaultAvatar from "../public/default-avatar.svg";
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { auth, db } from '../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { MdAdd } from 'react-icons/md';
+import Image from 'next/image';
+import defaultAvatar from '../public/default-avatar.svg';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
+  const [currentUser, setCurrentUser] = useState();
+
+  const getUpdatedUserInfo = async () => {
+    const docRef = doc(db, 'users', user?.uid);
+    const data = await getDoc(docRef);
+    setCurrentUser(data.data());
+  };
+
+  useEffect(() => {
+    getUpdatedUserInfo();
+  }, []);
 
   return (
     <nav className="flex items-center justify-between p-4 md:w-1/2 mx-auto">
       <Link href="/">
-        <button className=" text-teal-50 font-bold"> braindump</button>
+        <button className=" text-teal-50 font-bold">
+          {' '}
+          braindump
+        </button>
       </Link>
 
       {user ? (
         <ul className="flex items-center gap-2">
           <Link href="/addpost">
             <a>
-              <MdAdd className="bg-teal-500 rounded text-teal-50" size={30} />
+              <MdAdd
+                className="bg-teal-500 rounded text-teal-50"
+                size={30}
+              />
             </a>
           </Link>
           <Link href="/profile">
             <Image
-              src={user?.photoURL || defaultAvatar}
+              src={currentUser?.photoURL || defaultAvatar}
               alt="Picture of the profil owner"
               width={30}
               height={30}
