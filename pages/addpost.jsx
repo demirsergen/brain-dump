@@ -65,7 +65,7 @@ const Addpost = () => {
 
   useEffect(() => {
     checkForEdit();
-  }, [user, loading]);
+  }, [user]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();

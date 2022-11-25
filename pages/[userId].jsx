@@ -16,6 +16,7 @@ const UserProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [userProfile, setUserProfile] = useState();
   const [userPosts, setUserPosts] = useState([]);
+
   const router = useRouter();
   const { userId } = router.query;
 
@@ -45,9 +46,7 @@ const UserProfile = () => {
     if (user?.uid === userId) {
       router.push('/profile');
     }
-  }, [userId]);
 
-  useEffect(() => {
     getUserPosts();
     getUserInfo();
   }, [userId]);
