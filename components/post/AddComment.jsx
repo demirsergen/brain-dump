@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { auth, db } from '../../firebase';
+import { auth } from '../../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
-import {
-  addDoc,
-  collection,
-  serverTimestamp,
-  doc,
-} from 'firebase/firestore';
+import { addComment } from './utils/addComment';
 
 const AddComment = ({ post }) => {
   const [comment, setComment] = useState('');
@@ -23,14 +18,7 @@ const AddComment = ({ post }) => {
 
   const submitComment = async (e) => {
     e.preventDefault();
-    const postCollectionRef = doc(db, 'posts', post.id);
-    const commentsRef = collection(postCollectionRef, 'comments');
-    await addDoc(commentsRef, {
-      comment: comment,
-      timestamp: serverTimestamp(),
-      userId: user.uid,
-    });
-
+    addComment(post.id, user.uid, comment);
     setComment('');
   };
   return (

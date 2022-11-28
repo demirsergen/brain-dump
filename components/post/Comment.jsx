@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../../firebase';
 import defaultAvatar from '../../public/default-avatar.svg';
 import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,6 +12,7 @@ const Comment = ({ comment }) => {
   const getUserInfo = async () => {
     const docRef = doc(db, 'users', userId);
     const data = await getDoc(docRef);
+
     setUserInfo(data.data());
   };
 
