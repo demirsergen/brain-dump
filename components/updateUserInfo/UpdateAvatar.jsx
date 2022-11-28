@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, db } from '../../firebase';
+import React, { useContext, useState } from 'react';
+import { db } from '../../firebase';
 import { doc, updateDoc } from 'firebase/firestore';
 import {
   getStorage,
@@ -8,8 +7,9 @@ import {
   uploadBytes,
   getDownloadURL,
 } from 'firebase/storage';
+import { AuthContext } from '../Layout';
 const UpdateAvatar = () => {
-  const [user, loading] = useAuthState(auth);
+  const { currentUser } = useContext(AuthContext);
   const [file, setFile] = useState();
   const [message, setMessage] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
@@ -18,7 +18,10 @@ const UpdateAvatar = () => {
 
   const uploadAvatar = async (e) => {
     e.preventDefault();
-    const photosRef = ref(storage, `images/${user.uid}/avatar.png`);
+    const photosRef = ref(
+      storage,
+      `images/${currentUser.uid}/avatar.png`
+    );
     try {
       await uploadBytes(photosRef, file)
         .then((snapshot) => {
@@ -34,7 +37,10 @@ const UpdateAvatar = () => {
   };
 
   const updateAvatar = async () => {
-    const photoRef = ref(storage, `images/${user.uid}/avatar.png`);
+    const photoRef = ref(
+      storage,
+      `images/${currentUser.uid}/avatar.png`
+    );
     await getDownloadURL(photoRef).then((url) => {
       setPhotoUrl(url);
     });

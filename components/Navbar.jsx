@@ -1,27 +1,14 @@
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { auth, db } from '../firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import React, { useEffect, useState, useContext } from 'react';
+import { db } from '../firebase';
 import { MdAdd } from 'react-icons/md';
 import Image from 'next/image';
 import defaultAvatar from '../public/default-avatar.svg';
 import { doc, getDoc } from 'firebase/firestore';
+import { AuthContext } from './Layout';
 
 const Navbar = () => {
-  const [user, loading] = useAuthState(auth);
-  const [currentUser, setCurrentUser] = useState();
-
-  const getUpdatedUserInfo = async () => {
-    if (user) {
-      const docRef = doc(db, 'users', user?.uid);
-      const data = await getDoc(docRef);
-      setCurrentUser(data.data());
-    }
-  };
-
-  useEffect(() => {
-    getUpdatedUserInfo();
-  }, [user]);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <nav className="flex items-center justify-between p-4 md:w-1/2 mx-auto">
@@ -32,7 +19,7 @@ const Navbar = () => {
         </button>
       </Link>
 
-      {user ? (
+      {currentUser ? (
         <ul className="flex items-center gap-2">
           <Link href="/addpost">
             <a>

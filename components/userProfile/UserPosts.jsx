@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   collection,
   query,
@@ -7,29 +7,28 @@ import {
   doc,
   deleteDoc,
 } from 'firebase/firestore';
-import { auth, db } from '../../firebase';
+import { db } from '../../firebase';
 import { useRouter } from 'next/router';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { AiFillEdit } from 'react-icons/ai';
 import Post from '../post/Post';
 import Modal from '../Modal';
 import Link from 'next/link';
+import { AuthContext } from '../Layout';
 
 const UserPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
-  const [user, loading] = useAuthState(auth);
+  const { currentUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState();
 
   const router = useRouter();
 
   const getUserPosts = async () => {
-    if (loading) return;
-    if (!user) return router.push('/auth/login');
+    if (!currentUser) return router.push('/auth/login');
 
     const postsRef = collection(db, 'posts');
-    const q = query(postsRef, where('userId', '==', user.uid));
+    const q = query(postsRef, where('userId', '==', currentUser.uid));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setUserPosts(
@@ -47,7 +46,7 @@ const UserPosts = () => {
 
   useEffect(() => {
     getUserPosts();
-  }, [user, loading]);
+  }, [currentUser]);
 
   const handleModal = (selection, id) => {
     if (selection === 'delete') {

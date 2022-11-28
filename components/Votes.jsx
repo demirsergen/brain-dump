@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import React, { useState, useEffect, useContext } from 'react';
 import { AiOutlineArrowUp } from 'react-icons/ai';
-import { auth, db } from '../firebase';
+import { db } from '../firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { AuthContext } from '../components/Layout';
 
 const Votes = ({ post }) => {
   const [voteCount, setVoteCount] = useState(0);
   const [voted, setVoted] = useState(false);
-  const [user] = useAuthState(auth);
+  const { user } = useContext(AuthContext);
 
   const getVoteCount = async () => {
     const postRef = doc(db, 'posts', post.id);

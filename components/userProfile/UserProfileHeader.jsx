@@ -1,26 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image';
-import { auth, db } from '../../firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import defaultAvatar from '../../public/default-avatar.svg';
 import UserProfileHeaderButtons from './UserProfileHeaderButtons';
-import { doc, getDoc } from 'firebase/firestore';
+import { AuthContext } from '../Layout';
 
 const UserProfileHeader = () => {
-  const [user, loading] = useAuthState(auth);
-  const [currentUser, setCurrentUser] = useState();
-
-  const getUpdatedUserInfo = async () => {
-    if (user) {
-      const docRef = doc(db, 'users', user?.uid);
-      const data = await getDoc(docRef);
-      setCurrentUser(data.data());
-    }
-  };
-
-  useEffect(() => {
-    getUpdatedUserInfo();
-  }, []);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <div className="flex items-center gap-2 border-b-2 pb-2">
