@@ -40,7 +40,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-slate-600 rounded p-2">
+      <div className="bg-slate-600 rounded p-2 flex flex-col gap-2">
         <h1 className="text-teal-50 text-center font-bold">
           Latest Posts
         </h1>

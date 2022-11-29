@@ -22,14 +22,14 @@ const AddComment = ({ post }) => {
     setComment('');
   };
   return (
-    <form className="w-full flex bg-red-100 rounded overflow-hidden">
+    <form className="w-full flex rounded overflow-hidden">
       <input
         type="text"
         name="comment"
         value={comment}
         placeholder="Add a comment..."
         onChange={(e) => setComment(e.target.value)}
-        className="p-1 rounded flex-1"
+        className="p-1 rounded flex-1 bg-gray-100"
       />
       <button
         className="bg-teal-500 p-1 text-teal-50 text-sm"

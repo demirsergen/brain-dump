@@ -9,12 +9,10 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useRouter } from 'next/router';
-import { BsFillTrashFill } from 'react-icons/bs';
-import { AiFillEdit } from 'react-icons/ai';
 import Post from '../post/Post';
 import Modal from '../Modal';
-import Link from 'next/link';
 import { AuthContext } from '../Layout';
+import PostButtons from './PostButtons';
 
 const UserPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
@@ -67,24 +65,11 @@ const UserPosts = () => {
         return (
           <div key={post.id} className="bg-slate-500 rounded pb-2">
             <Post post={post} />
-            <div className="flex items-center gap-2 px-2">
-              <button
-                className="flex items-center gap-2 text-red-500 font-medium bg-teal-50 rounded p-1"
-                onClick={() => {
-                  setShowModal(true);
-                  setDeleteId(post.id);
-                }}
-              >
-                <BsFillTrashFill />
-                Delete
-              </button>
-              <Link href={{ pathname: '/addpost', query: post }}>
-                <button className="flex items-center gap-2 text-teal-500 font-medium bg-teal-50 rounded p-1">
-                  <AiFillEdit />
-                  Edit
-                </button>
-              </Link>
-            </div>
+            <PostButtons
+              setShowModal={setShowModal}
+              post={post}
+              setDeleteId={setDeleteId}
+            />
           </div>
         );
       })}

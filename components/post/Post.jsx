@@ -20,7 +20,7 @@ const Post = ({ post }) => {
     getUserInfo();
   }, []);
   return (
-    <div className="bg-slate-500 my-2 rounded p-2 grow">
+    <div className="bg-slate-800 rounded p-2 grow my-1">
       <div className="flex gap-2">
         <Link href={`/${post.userId}`}>
           <Image
@@ -38,7 +38,7 @@ const Post = ({ post }) => {
         </h1>
       </div>
       <div className="bg-gray-100 rounded p-2 my-2">
-        <p>{post.text}</p>
+        <p className="text-black">{post.text}</p>
       </div>
       <div className="flex items-center justify-between border-b-2 w-full mb-2">
         <span className="text-teal-50">#{post.tag}</span>

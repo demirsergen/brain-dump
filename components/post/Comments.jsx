@@ -8,6 +8,7 @@ const Comments = ({ post }) => {
 
   const getComments = async () => {
     const commentsRef = collection(db, `posts/${post.id}/comments`);
+    if (!commentsRef) return;
     const unsubscribe = onSnapshot(commentsRef, (snapshot) => {
       const newComments = [];
       snapshot.forEach((doc) => {
@@ -23,7 +24,7 @@ const Comments = ({ post }) => {
   }, []);
 
   return (
-    <div className="bg-white my-1 rounded overflow-hidden">
+    <div className=" my-1 rounded overflow-hidden">
       {comments?.map((comment, index) => (
         <Comment key={index} comment={comment} />
       ))}

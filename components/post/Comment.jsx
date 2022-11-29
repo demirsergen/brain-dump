@@ -21,7 +21,7 @@ const Comment = ({ comment }) => {
   }, []);
 
   return (
-    <div className="p-1 bg-white my-1">
+    <div className="p-1 rounded bg-white my-1">
       <div className="flex items-center p-1 border-b-2">
         <Link href={`/${userId}`}>
           <Image
