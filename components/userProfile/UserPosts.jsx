@@ -19,12 +19,12 @@ const UserPosts = () => {
   const { currentUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState();
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
   const getUserPosts = async () => {
     if (!currentUser) return router.push('/auth/login');
-
     const postsRef = collection(db, 'posts');
     const q = query(postsRef, where('userId', '==', currentUser.uid));
 
@@ -32,6 +32,7 @@ const UserPosts = () => {
       setUserPosts(
         snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       );
+      setLoading(false);
     });
 
     return unsubscribe;
@@ -44,7 +45,7 @@ const UserPosts = () => {
 
   useEffect(() => {
     getUserPosts();
-  }, [currentUser]);
+  }, []);
 
   const handleModal = (selection, id) => {
     if (selection === 'delete') {
@@ -57,6 +58,9 @@ const UserPosts = () => {
 
   if (showModal) {
     return <Modal handleModal={handleModal} deleteId={deleteId} />;
+  }
+  if (loading) {
+    return <div className="text-red-900">Loading...</div>;
   }
   return (
     <div className="p-2 shadow rounded my-2">

@@ -17,7 +17,7 @@ const Login = () => {
     password: '',
   });
   const [loginError, setLoginError] = useState('');
-  const { user } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const [signInWithGoogle, userCred, loading, error] =
     useSignInWithGoogle(auth);
   const [
@@ -69,10 +69,10 @@ const Login = () => {
   }, [userCred]);
 
   useEffect(() => {
-    if (user) {
+    if (currentUser) {
       route.push('/profile');
     }
-  }, []);
+  }, [currentUser]);
   return (
     <div className="shadow bg-slate-600 mt-16 p-4 w-full sm:w-3/4 md:w-2/4 lg:w-1/3 mx-auto rounded">
       <h1 className="text-2xl font-medium text-center text-teal-50">

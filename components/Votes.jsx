@@ -8,6 +8,7 @@ const Votes = ({ post }) => {
   const [voteCount, setVoteCount] = useState(0);
   const [voted, setVoted] = useState(false);
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   const getVoteCount = async () => {
     const postRef = doc(db, 'posts', post.id);
@@ -19,6 +20,7 @@ const Votes = ({ post }) => {
     if (existingVote) setVoted(true);
 
     setVoteCount(postVotes.length);
+    setLoading(false);
   };
 
   const onVote = async (postId, userId) => {
@@ -48,23 +50,30 @@ const Votes = ({ post }) => {
   useEffect(() => {
     getVoteCount();
   }, [voted]);
-  return (
-    <div className="flex flex-col items-center justify-center p-2 gap-2 text-teal-50">
-      <button
-        onClick={() => onVote(post.id, user.uid)}
-        className={voted ? 'text-green-400' : ''}
-      >
-        <AiOutlineArrowUp size={20} />
-      </button>
-      <span
-        className={
-          voteCount == 0 ? '' : voteCount > 0 ? 'text-green-400' : ''
-        }
-      >
-        {voteCount}
-      </span>
-    </div>
-  );
+
+  if (user && !loading) {
+    return (
+      <div className="flex flex-col items-center justify-center p-2 gap-2 text-teal-50">
+        <button
+          onClick={() => onVote(post.id, user.uid)}
+          className={voted ? 'text-green-400' : ''}
+        >
+          <AiOutlineArrowUp size={20} />
+        </button>
+        <span
+          className={
+            voteCount == 0
+              ? ''
+              : voteCount > 0
+              ? 'text-green-400'
+              : ''
+          }
+        >
+          {voteCount}
+        </span>
+      </div>
+    );
+  }
 };
 
 export default Votes;
