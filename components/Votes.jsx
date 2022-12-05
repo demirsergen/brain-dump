@@ -15,7 +15,7 @@ const Votes = ({ post }) => {
     const documentData = document.data();
     const { postVotes } = documentData;
 
-    const existingVote = postVotes.includes(user.uid);
+    const existingVote = postVotes.includes(user?.uid);
     if (existingVote) setVoted(true);
 
     setVoteCount(postVotes.length);
