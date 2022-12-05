@@ -1,17 +1,22 @@
 import Head from 'next/head';
 import Post from '../components/post/Post';
 import { useState, useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import {
   collection,
   query,
   orderBy,
   onSnapshot,
 } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db, auth } from '../firebase';
 import Votes from '../components/Votes';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [allPosts, setAllPosts] = useState();
+  const [user, loading] = useAuthState(auth);
+
+  const route = useRouter();
 
   const getAllPosts = async () => {
     const postCollectionRef = collection(db, 'posts');
@@ -27,6 +32,12 @@ export default function Home() {
 
   useEffect(() => {
     getAllPosts();
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
+      route.push('/auth/login');
+    }
   }, []);
 
   return (

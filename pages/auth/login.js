@@ -1,7 +1,8 @@
 import { BsGoogle } from 'react-icons/bs';
 import { auth, db } from '../../firebase';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../components/Layout';
 import Link from 'next/link';
 import NoteForLogin from '../../components/NoteForLogin';
 import {
@@ -16,6 +17,7 @@ const Login = () => {
     password: '',
   });
   const [loginError, setLoginError] = useState('');
+  const { user } = useContext(AuthContext);
   const [signInWithGoogle, userCred, loading, error] =
     useSignInWithGoogle(auth);
   const [
@@ -67,7 +69,9 @@ const Login = () => {
   }, [userCred]);
 
   useEffect(() => {
-    route.push('/profile');
+    if (user) {
+      route.push('/profile');
+    }
   }, []);
   return (
     <div className="shadow bg-slate-600 mt-16 p-4 w-full sm:w-3/4 md:w-2/4 lg:w-1/3 mx-auto rounded">
