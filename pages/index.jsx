@@ -38,7 +38,7 @@ export default function Home() {
     if (!user) {
       route.push('/auth/login');
     }
-  }, []);
+  }, [user]);
 
   return (
     <div className="md:w-1/2 mx-auto">

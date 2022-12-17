@@ -1,14 +1,13 @@
 import { BsGoogle } from 'react-icons/bs';
 import { auth, db } from '../../firebase';
 import { useRouter } from 'next/router';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../../components/Layout';
 import Link from 'next/link';
 import NoteForLogin from '../../components/NoteForLogin';
 import {
   useSignInWithGoogle,
   useSignInWithEmailAndPassword,
+  useAuthState,
 } from 'react-firebase-hooks/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
@@ -18,7 +17,6 @@ const Login = () => {
     password: '',
   });
   const [loginError, setLoginError] = useState('');
-  const { currentUser } = useContext(AuthContext);
   const [user] = useAuthState(auth);
   const [signInWithGoogle, userCred, loading, error] =
     useSignInWithGoogle(auth);

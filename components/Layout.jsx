@@ -15,6 +15,8 @@ const Layout = ({ children }) => {
       const docRef = doc(db, 'users', user?.uid);
       const data = await getDoc(docRef);
       setCurrentUser(data.data());
+    } else {
+      setCurrentUser(null);
     }
   };
 
@@ -22,7 +24,7 @@ const Layout = ({ children }) => {
     getUpdatedUserInfo();
   }, [user]);
   return (
-    <AuthContext.Provider value={{ user, currentUser }}>
+    <AuthContext.Provider value={{ currentUser }}>
       <div className="w-full min-h-screen mx-auto font-poppins bg-slate-800">
         <Navbar />
         <main>{children}</main>
