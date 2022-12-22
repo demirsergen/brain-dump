@@ -1,16 +1,16 @@
-import React from "react";
-import Link from "next/link";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
+import React from 'react';
+import Link from 'next/link';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 const UserProfileHeaderButtons = () => {
   const signout = async () => {
     await signOut(auth)
       .then(() => {
-        router.push("/auth/login");
+        router.push('/auth/login');
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
   return (
