@@ -8,6 +8,7 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import { AuthContext } from '../Layout';
+import Button from './Button';
 const UpdateAvatar = () => {
   const { currentUser } = useContext(AuthContext);
   const [file, setFile] = useState();
@@ -55,9 +56,9 @@ const UpdateAvatar = () => {
     setFile(null);
   };
   return (
-    <div>
+    <div className="px-4">
       <h1 className="text-teal-50 text-center uppercase font-bold">
-        Update Avatar
+        Edit Avatar
       </h1>
       <form className="px-4">
         <div className="p-2 rounded">
@@ -65,16 +66,11 @@ const UpdateAvatar = () => {
           <input
             type="file"
             name="avatar"
-            className="w-full bg-gray-100 p-2 rounded "
+            className="w-full bg-gray-100 p-1 rounded "
             onChange={(e) => setFile(e.target.files[0])}
           />
         </div>
-        <button
-          onClick={uploadAvatar}
-          className="bg-teal-500 p-2 rounded text-teal-50 text-sm block w-full"
-        >
-          Upload
-        </button>
+        <Button title="Upload" handleClick={updateAvatar} />
         <span className="text-green-500 block mx-auto text-center p-4">
           {message && message}
         </span>

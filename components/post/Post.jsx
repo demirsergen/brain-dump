@@ -24,7 +24,7 @@ const Post = ({ post }) => {
 
   if (userProfile) {
     return (
-      <div className="bg-slate-800 rounded p-2 grow my-1">
+      <div className="bg-slate-500 rounded p-2 grow my-1">
         <div className="flex gap-2">
           <Link href={`/${post.userId}`}>
             <Image

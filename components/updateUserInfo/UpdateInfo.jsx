@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { doc, writeBatch } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { db, auth } from '../../firebase';
+import Button from './Button';
 
 const UpdateInfo = () => {
   const [user, loading] = useAuthState(auth);
@@ -33,9 +34,9 @@ const UpdateInfo = () => {
     setFullname('');
   };
   return (
-    <div>
+    <div className="px-4">
       <h1 className="text-teal-50 text-center uppercase font-bold">
-        Update Info
+        Edit Info
       </h1>
       <form className="px-4">
         <div className="p-2 rounded">
@@ -46,7 +47,7 @@ const UpdateInfo = () => {
             value={username}
             name="username"
             placeholder="Username"
-            className="w-full bg-gray-100 p-2 rounded "
+            className="w-full bg-gray-100 p-1 rounded "
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -58,16 +59,11 @@ const UpdateInfo = () => {
             value={fullname}
             name="fullname"
             placeholder="Fullname"
-            className="w-full bg-gray-100 p-2 rounded "
+            className="w-full bg-gray-100 p-1 rounded "
             onChange={(e) => setFullname(e.target.value)}
           />
         </div>
-        <button
-          onClick={updateInfo}
-          className="bg-teal-500 p-2 rounded text-teal-50 text-sm block w-full"
-        >
-          Update
-        </button>
+        <Button title="Update" handleClick={updateInfo} />
         <span className="text-green-500 block mx-auto text-center p-4">
           {message && message}
         </span>
