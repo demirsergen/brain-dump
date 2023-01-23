@@ -29,7 +29,7 @@ const AddComment = ({ post }) => {
         value={comment}
         placeholder="Add a comment..."
         onChange={(e) => setComment(e.target.value)}
-        className="p-1 rounded flex-1 bg-gray-100"
+        className="p-1 rounded flex-1 bg-gray-100 text-sm"
       />
       <button
         className="bg-teal-500 p-1 text-teal-50 text-sm"

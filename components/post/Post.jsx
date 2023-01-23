@@ -35,7 +35,7 @@ const Post = ({ post }) => {
               className="rounded-full cursor-pointer"
             />
           </Link>
-          <h1 className="text-teal-50">
+          <h1 className="text-teal-50 text-sm">
             {userProfile?.username ||
               userProfile?.displayName ||
               'Anonymous'}
@@ -44,7 +44,7 @@ const Post = ({ post }) => {
         <div className="bg-gray-100 rounded p-2 my-2">
           <p className="text-black">{post.text}</p>
         </div>
-        <div className="flex items-center justify-between border-b-2 w-full mb-2">
+        <div className="flex items-center justify-between w-full mb-2">
           <span className="text-teal-50">#{post.tag}</span>
           <div className="flex flex-col items-end  ">
             <span className="text-teal-50">
