@@ -35,11 +35,13 @@ const Post = ({ post }) => {
               className="rounded-full cursor-pointer"
             />
           </Link>
-          <h1 className="text-teal-50 text-sm">
-            {userProfile?.username ||
-              userProfile?.displayName ||
-              'Anonymous'}
-          </h1>
+          <Link href={`/${post.userId}`}>
+            <h1 className="text-teal-50 text-sm cursor-pointer">
+              {userProfile?.username ||
+                userProfile?.displayName ||
+                'Anonymous'}
+            </h1>
+          </Link>
         </div>
         <div className="bg-gray-100 rounded p-2 my-2">
           <p className="text-black">{post.text}</p>
