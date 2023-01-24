@@ -24,7 +24,7 @@ const Comments = ({ post }) => {
   }, []);
 
   return (
-    <div className=" my-1 rounded overflow-hidden">
+    <div className="my-1 rounded overflow-hidden">
       {comments?.map((comment, index) => (
         <Comment key={index} comment={comment} />
       ))}
