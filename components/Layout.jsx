@@ -3,6 +3,7 @@ import { auth, db } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import Navbar from './Navbar';
+import AllNews from './news/AllNews';
 
 export const AuthContext = createContext();
 
@@ -27,6 +28,9 @@ const Layout = ({ children }) => {
     <AuthContext.Provider value={{ currentUser }}>
       <div className="w-full min-h-screen mx-auto font-poppins bg-slate-800">
         <Navbar />
+        <aside>
+          <AllNews />
+        </aside>
         <main>{children}</main>
       </div>
     </AuthContext.Provider>
