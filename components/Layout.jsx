@@ -28,10 +28,11 @@ const Layout = ({ children }) => {
     <AuthContext.Provider value={{ currentUser }}>
       <div className="w-full min-h-screen mx-auto font-poppins bg-slate-800">
         <Navbar />
-        <aside>
+
+        <main className="flex">
           <AllNews />
-        </aside>
-        <main>{children}</main>
+          {children}
+        </main>
       </div>
     </AuthContext.Provider>
   );

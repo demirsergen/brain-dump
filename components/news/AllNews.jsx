@@ -7,6 +7,7 @@ const AllNews = () => {
 
   const getData = async () => {
     const data = await getAllNews();
+
     setNews(data);
   };
 
@@ -15,12 +16,12 @@ const AllNews = () => {
   }, []);
 
   return (
-    <>
+    <div className="bg-white hidden">
       <h3>News</h3>
       {news?.map((news) => (
         <News key={news.id} news={news} />
       ))}
-    </>
+    </div>
   );
 };
 
