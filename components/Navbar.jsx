@@ -1,10 +1,8 @@
 import Link from 'next/link';
-import React, { useEffect, useState, useContext } from 'react';
-import { db } from '../firebase';
+import React, { useContext } from 'react';
 import { MdAdd } from 'react-icons/md';
 import Image from 'next/image';
 import defaultAvatar from '../public/default-avatar.svg';
-import { doc, getDoc } from 'firebase/firestore';
 import { AuthContext } from './Layout';
 
 const Navbar = () => {
