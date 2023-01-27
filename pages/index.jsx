@@ -41,7 +41,7 @@ export default function Home() {
   }, [user]);
 
   return (
-    <div className="md:w-1/2 mx-auto">
+    <div className="flex-1">
       <Head>
         <title>braindump</title>
         <meta
@@ -51,7 +51,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-slate-600 rounded p-2 flex flex-col gap-2">
+      <div className="bg-slate-600 rounded p-2 flex flex-col gap-2 flex-grow">
         <h1 className="text-teal-50 text-center font-bold">
           Latest Posts
         </h1>

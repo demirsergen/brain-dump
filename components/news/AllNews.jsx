@@ -16,8 +16,8 @@ const AllNews = () => {
   }, []);
 
   return (
-    <div className="bg-white hidden">
-      <h3>News</h3>
+    <div className="bg-slate-600 text-teal-50 w-1/3 flex flex-col gap-2 p-2 rounded">
+      <h3 className="text-center font-bold">News</h3>
       {news?.map((news) => (
         <News key={news.id} news={news} />
       ))}
