@@ -16,7 +16,7 @@ const AllNews = () => {
   }, []);
 
   return (
-    <div className="bg-slate-600 text-teal-50 w-1/3 flex flex-col gap-2 p-2 rounded">
+    <div className="bg-slate-600 h-screen text-teal-50 w-1/3 flex flex-col gap-2 p-2 rounded overflow-y-scroll">
       <h3 className="text-center font-bold">News</h3>
       {news?.map((news) => (
         <News key={news.id} news={news} />
