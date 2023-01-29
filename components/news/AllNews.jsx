@@ -5,6 +5,7 @@ import { AuthContext } from '../Layout';
 
 const AllNews = () => {
   const [news, setNews] = useState(null);
+  const [query, setQuery] = useState('');
 
   const { currentUser } = useContext(AuthContext);
 
@@ -12,6 +13,14 @@ const AllNews = () => {
     const data = await getAllNews();
 
     setNews(data);
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const data = await getAllNews(query);
+
+    setNews(data);
+    setQuery('');
   };
 
   useEffect(() => {
@@ -22,6 +31,21 @@ const AllNews = () => {
     return (
       <div className="bg-slate-600 h-screen text-teal-50 w-1/3 flex flex-col gap-2 p-2 rounded overflow-y-scroll">
         <h3 className="text-center font-bold">News</h3>
+        <div className="flex justify-between gap-1">
+          <input
+            type="text"
+            name="search"
+            placeholder="Search..."
+            onChange={(e) => setQuery(e.target.value)}
+            className="p-1 rounded flex-1 text-black"
+          />
+          <input
+            type="submit"
+            value="Search"
+            onClick={handleSearch}
+            className="bg-slate-500 p-1 rounded cursor-pointer"
+          />
+        </div>
         {news?.map((news) => (
           <News key={news.id} news={news} />
         ))}
