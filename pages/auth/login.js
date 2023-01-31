@@ -70,7 +70,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      route.push('/profile');
+      route.push('/');
     }
   }, [user]);
   return (
