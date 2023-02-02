@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const News = ({ news }) => {
   return (
-    <div className="bg-slate-500 p-2 rounded flex flex-col gap-2">
+    <div className="bg-slate-500 p-2 rounded flex flex-col gap-2 text-sm">
       <Image
         src={news.urlToImage}
         alt="news-image"

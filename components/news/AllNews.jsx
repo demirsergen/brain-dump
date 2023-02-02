@@ -35,15 +35,16 @@ const AllNews = () => {
           <input
             type="text"
             name="search"
+            value={query}
             placeholder="Search..."
             onChange={(e) => setQuery(e.target.value)}
-            className="p-1 rounded flex-1 text-black"
+            className="p-1 rounded flex-1 text-black text-sm"
           />
           <input
             type="submit"
             value="Search"
             onClick={handleSearch}
-            className="bg-slate-500 p-1 rounded cursor-pointer"
+            className="bg-slate-500 p-1 rounded cursor-pointer text-sm"
           />
         </div>
         {news?.map((news) => (
