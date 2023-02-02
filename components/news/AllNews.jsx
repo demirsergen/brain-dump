@@ -30,7 +30,7 @@ const AllNews = () => {
   if (currentUser) {
     return (
       <div className="bg-slate-600 h-screen text-teal-50 w-1/3 flex flex-col gap-2 px-2 rounded overflow-y-scroll">
-        <div className="flex flex-col justify-between gap-1 p-1 sticky top-0 z-10 bg-slate-600">
+        <div className="flex flex-col justify-between gap-1 py-2 sticky top-0 z-10 bg-slate-600">
           <h3 className="text-center font-bold">News</h3>
           <input
             type="text"
