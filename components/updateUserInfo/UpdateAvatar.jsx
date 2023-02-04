@@ -60,8 +60,8 @@ const UpdateAvatar = () => {
       <h1 className="text-teal-50 text-center uppercase font-bold">
         Edit Avatar
       </h1>
-      <form className="px-4">
-        <div className="p-2 rounded">
+      <form className="px-4 flex flex-col gap-2">
+        <div className="rounded">
           <label className="text-teal-50">Upload Avatar:</label>
           <input
             type="file"

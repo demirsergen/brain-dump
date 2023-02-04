@@ -38,27 +38,27 @@ const UpdateInfo = () => {
       <h1 className="text-teal-50 text-center uppercase font-bold">
         Edit Info
       </h1>
-      <form className="px-4">
-        <div className="p-2 rounded">
+      <form className="px-4 flex flex-col gap-2">
+        <div className="rounded">
           <label className="text-teal-50">Username:</label>
           <br />
           <input
             type="text"
             value={username}
             name="username"
-            placeholder="Username"
+            placeholder="New username"
             className="w-full bg-gray-100 p-1 rounded "
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="p-2 rounded">
+        <div className="rounded">
           <label className="text-teal-50">Fullname:</label>
           <br />
           <input
             type="text"
             value={fullname}
             name="fullname"
-            placeholder="Fullname"
+            placeholder="New Fullname"
             className="w-full bg-gray-100 p-1 rounded "
             onChange={(e) => setFullname(e.target.value)}
           />
