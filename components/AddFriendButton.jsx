@@ -6,13 +6,18 @@ const AddFriendButton = () => {
   const [alreadyFriends, setAlreadyFriends] = useState(false);
 
   const checkFriend = () => {
-    // check if friend exist, if it does do not show add button and update state variable
+    // check if friend exist, if it does, do not show add button and update state variable. return true or false
   };
 
+  const addFriend = () => {};
+  const removeFriend = () => {};
+
   if (alreadyFriends) {
-    return <button>Unfriend</button>;
+    return (
+      <button onClick={() => removeFriend(userId)}>Unfriend</button>
+    );
   } else {
-    return <button>Add</button>;
+    return <button onClick={() => addFriend(userId)}>Add</button>;
   }
 };
 
