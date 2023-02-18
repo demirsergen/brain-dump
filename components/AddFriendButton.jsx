@@ -7,6 +7,11 @@ const AddFriendButton = () => {
 
   const checkFriend = () => {
     // check if friend exist, if it does, do not show add button and update state variable. return true or false
+    if (!alreadyFriends) {
+      // friend adding functionality
+    } else {
+      // friend removing functionality
+    }
   };
 
   const addFriend = () => {};
