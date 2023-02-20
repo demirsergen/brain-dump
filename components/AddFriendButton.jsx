@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from './Layout';
 
 const AddFriendButton = () => {
@@ -6,16 +6,21 @@ const AddFriendButton = () => {
   const [alreadyFriends, setAlreadyFriends] = useState(false);
 
   const checkFriend = () => {
-    // check if friend exist, if it does, do not show add button and update state variable. return true or false
-    if (!alreadyFriends) {
-      // friend adding functionality
-    } else {
-      // friend removing functionality
-    }
+    // friend checking functionality from Firebase.
+    // update state
   };
 
-  const addFriend = () => {};
-  const removeFriend = () => {};
+  useEffect(() => {
+    checkFriend();
+  }, [])
+
+  const addFriend = () => {
+    // friend adding functionality
+  };
+  const removeFriend = () => {
+    // friend removing functionality
+
+  };
 
   if (alreadyFriends) {
     return (
