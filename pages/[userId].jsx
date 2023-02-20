@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { HiUserAdd } from 'react-icons/hi';
 import { useRouter } from 'next/router';
 import { db, auth } from '../firebase';
 import {
@@ -58,6 +59,7 @@ const UserProfile = () => {
         userProfile?.username ||
         'Anonymous'
       }'s Posts`}</h1>
+      {/* <HiUserAdd /> */}
       <div>
         {userPosts.map((post) => {
           return <Post key={post.id} post={post} />;
