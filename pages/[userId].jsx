@@ -72,9 +72,9 @@ const UserProfile = () => {
         }`}</h1>
         <span className="border-2 rounded p-1 cursor-pointer">
           {!alreadyFriends ? (
-            <CgUserAdd color="white" />
+            <CgUserAdd color="white" title="Add Friend" />
           ) : (
-            <CgUserRemove color="white" />
+            <CgUserRemove color="white" title="Remove Friend" />
           )}
         </span>
       </div>
