@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import Navbar from './Navbar';
 import AllNews from './news/AllNews';
+import Footer from './Footer';
 
 export const AuthContext = createContext();
 
@@ -32,6 +33,7 @@ const Layout = ({ children }) => {
           {children}
           <AllNews />
         </main>
+        <Footer />
       </div>
     </AuthContext.Provider>
   );
