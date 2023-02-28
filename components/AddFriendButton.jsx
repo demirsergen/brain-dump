@@ -1,34 +1,45 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
 import { AuthContext } from './Layout';
 
 const AddFriendButton = () => {
   const { currentUser } = useContext(AuthContext);
   const [alreadyFriends, setAlreadyFriends] = useState(false);
 
-  // WORK ON THE FUNCTIONALITY
+  const router = useRouter();
+  const { userId } = router.query;
 
-  const checkFriend = () => {
-    // friend checking functionality from Firebase.
-    // update state
-  };
+  const senderId = currentUser.id;
+  const recipientId = userId;
 
-  useEffect(() => {
-    checkFriend();
-  }, []);
+  const sendFriendRequest = async (senderId, recipientId) => {
+    try {
+      // Create a new friend request document in the Firestore database
+      await db.collection('friendRequests').add({
+        sender: senderId,
+        recipient: recipientId,
+        status: 'pending',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
 
-  const addFriend = () => {
-    // friend adding functionality
-  };
-  const removeFriend = () => {
-    // friend removing functionality
+      console.log('Friend request sent successfully!');
+    } catch (error) {
+      console.error('Error sending friend request:', error);
+    }
   };
 
   if (alreadyFriends) {
     return (
-      <button onClick={() => removeFriend(userId)}>Unfriend</button>
+      <button onClick={() => addFriend(userId)}>Unfriend</button>
     );
   } else {
-    return <button onClick={() => addFriend(userId)}>Add</button>;
+    return (
+      <button
+        onClick={() => sendFriendRequest(senderId, recipientId)}
+      >
+        Add
+      </button>
+    );
   }
 };
 
