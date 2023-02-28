@@ -5,6 +5,8 @@ const AddFriendButton = () => {
   const { currentUser } = useContext(AuthContext);
   const [alreadyFriends, setAlreadyFriends] = useState(false);
 
+  // WORK ON THE FUNCTIONALITY
+
   const checkFriend = () => {
     // friend checking functionality from Firebase.
     // update state
@@ -12,14 +14,13 @@ const AddFriendButton = () => {
 
   useEffect(() => {
     checkFriend();
-  }, [])
+  }, []);
 
   const addFriend = () => {
     // friend adding functionality
   };
   const removeFriend = () => {
     // friend removing functionality
-
   };
 
   if (alreadyFriends) {
