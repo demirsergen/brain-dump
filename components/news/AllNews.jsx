@@ -11,7 +11,6 @@ const AllNews = () => {
 
   const getData = async () => {
     const data = await getAllNews();
-
     setNews(data);
   };
 
@@ -47,9 +46,9 @@ const AllNews = () => {
             className="bg-slate-500 p-1 rounded cursor-pointer text-sm"
           />
         </div>
-        {news?.map((news) => (
-          <News key={news.id} news={news} />
-        ))}
+
+        {news &&
+          news.map((news, index) => <News key={index} news={news} />)}
       </div>
     );
   }
