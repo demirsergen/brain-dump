@@ -7,7 +7,7 @@ export async function getAllNews(query) {
   let year = date.getFullYear();
 
   const url = `https://newsapi.org/v2/everything?q=${
-    query ? query : 'javascript'
+    query ? query : 'technology'
   }&from=${year}-${month}-${day}&sortBy=popularity&pageSize=10&apiKey=${apiKey}`;
 
   const response = await fetch(url);
