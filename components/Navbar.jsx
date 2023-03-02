@@ -20,12 +20,10 @@ const Navbar = () => {
       {currentUser ? (
         <ul className="flex items-center gap-2">
           <Link href="/addpost">
-            <a>
-              <MdAdd
-                className="bg-teal-500 rounded text-teal-50"
-                size={30}
-              />
-            </a>
+            <MdAdd
+              className="bg-teal-500 rounded text-teal-50"
+              size={30}
+            />
           </Link>
           <Link href="/profile">
             <Image
