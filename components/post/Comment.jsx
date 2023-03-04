@@ -7,6 +7,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AuthContext } from '../Layout';
 
+//write deleting logic
+
 const Comment = ({ comment }) => {
   const [userInfo, setUserInfo] = useState();
   const { currentUser } = useContext(AuthContext);
