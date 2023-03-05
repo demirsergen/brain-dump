@@ -7,7 +7,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AuthContext } from '../Layout';
 
-//write deleting logic
+// write deleting logic
+// remove the specific comment using its id
 
 const Comment = ({ comment }) => {
   const [userInfo, setUserInfo] = useState();
