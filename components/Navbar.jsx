@@ -21,7 +21,7 @@ const Navbar = () => {
         <ul className="flex items-center gap-2">
           <Link href="/addpost">
             <MdAdd
-              className="bg-teal-500 rounded text-teal-50"
+              className="bg-teal-500 rounded text-teal-50 cursor-pointer"
               size={30}
             />
           </Link>
