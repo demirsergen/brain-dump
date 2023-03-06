@@ -13,6 +13,7 @@ const Comment = ({ comment }) => {
   const { currentUser } = useContext(AuthContext);
   const commentUserId = comment.userId;
 
+  // write logic to add modal for delete or cancel box
   const handleDeleteComment = (postId, commentId) => {
     deleteComment(postId, commentId);
   };
