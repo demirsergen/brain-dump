@@ -6,9 +6,10 @@ import Comment from './Comment';
 const Comments = ({ post }) => {
   const [comments, setComments] = useState();
 
-  const getComments = async () => {
+  const getComments = () => {
     const commentsRef = collection(db, `posts/${post.id}/comments`);
     if (!commentsRef) return;
+
     const unsubscribe = onSnapshot(commentsRef, (snapshot) => {
       const newComments = [];
       snapshot.forEach((doc) => {
@@ -20,7 +21,10 @@ const Comments = ({ post }) => {
   };
 
   useEffect(() => {
-    getComments();
+    const allComments = getComments(post.id);
+
+    console.log(getComments());
+    setComments(allComments);
   }, []);
 
   return (
