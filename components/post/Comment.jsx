@@ -3,17 +3,19 @@ import defaultAvatar from '../../public/default-avatar.svg';
 import { BsTrash } from 'react-icons/bs';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { deleteComment } from './utils/deleteComment';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AuthContext } from '../Layout';
-
-// write deleting logic
-// remove the specific comment using its id
 
 const Comment = ({ comment }) => {
   const [userInfo, setUserInfo] = useState();
   const { currentUser } = useContext(AuthContext);
   const commentUserId = comment.userId;
+
+  const handleDeleteComment = (postId, commentId) => {
+    deleteComment(postId, commentId);
+  };
 
   const getUserInfo = async () => {
     const docRef = doc(db, 'users', commentUserId);
@@ -50,6 +52,9 @@ const Comment = ({ comment }) => {
           <span
             className={
               commentUserId === currentUser.uid ? 'block' : 'hidden'
+            }
+            onClick={() =>
+              handleDeleteComment(comment.postId, comment.commentId)
             }
           >
             <BsTrash size={20} className="cursor-pointer" />
