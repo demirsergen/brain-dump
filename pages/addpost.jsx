@@ -80,7 +80,7 @@ const Addpost = () => {
   };
 
   return (
-    <div className="my-4 py-4 bg-slate-600 rounded md:w-1/2 mx-auto">
+    <div className="py-4 bg-slate-600 rounded md:w-1/2 mx-auto flex-1">
       <h1 className="text-teal-50 text-center uppercase font-bold">
         {routerData.id ? 'Update Your Idea' : 'Share a new Idea'}
       </h1>
