@@ -9,13 +9,11 @@ import Comments from './Comments';
 
 const Post = ({ post }) => {
   const [userProfile, setUserProfile] = useState();
-  const [loading, setLoading] = useState(true);
 
   const getUserInfo = async () => {
     const docRef = doc(db, 'users', post.userId);
     const data = await getDoc(docRef);
     setUserProfile(data.data());
-    setLoading(false);
   };
 
   useEffect(() => {
