@@ -14,18 +14,15 @@ const Comments = ({ post }) => {
       const newComments = [];
       snapshot.forEach((doc) => {
         newComments.push(doc.data());
-        setComments(newComments);
+        setComments([...newComments]);
       });
     });
     return unsubscribe;
   };
 
   useEffect(() => {
-    const allComments = getComments(post.id);
-
-    console.log(getComments());
-    setComments(allComments);
-  }, []);
+    getComments();
+  }, [comments]);
 
   return (
     <div className="my-1 rounded overflow-hidden">
