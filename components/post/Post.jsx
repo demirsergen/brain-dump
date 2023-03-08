@@ -42,7 +42,7 @@ const Post = ({ post }) => {
           </Link>
         </div>
         <div className="bg-gray-100 rounded p-2 my-2">
-          <p className="text-black">{post.text}</p>
+          <p className="text-black text-sm">{post.text}</p>
         </div>
         <div className="flex items-center justify-between w-full mb-2">
           <span className="text-teal-50 text-sm">#{post.tag}</span>

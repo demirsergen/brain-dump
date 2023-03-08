@@ -22,7 +22,7 @@ const AddFriendButton = () => {
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
 
-      console.log('Friend request sent successfully!');
+      alert('Friend request sent successfully!');
     } catch (error) {
       console.error('Error sending friend request:', error);
     }

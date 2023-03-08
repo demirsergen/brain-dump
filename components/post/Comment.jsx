@@ -49,7 +49,7 @@ const Comment = ({ comment }) => {
           </Link>
         </div>
         <div className="flex items-center justify-between">
-          <p className="p-1">{comment.comment}</p>
+          <p className="p-1 text-sm">{comment.comment}</p>
           <span
             className={
               commentUserId === currentUser.uid ? 'block' : 'hidden'
