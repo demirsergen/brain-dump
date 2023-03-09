@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useRouter } from 'next/router';
 import defaultAvatar from '../../public/default-avatar.svg';
 import { BsTrash } from 'react-icons/bs';
 import { doc, getDoc } from 'firebase/firestore';
@@ -7,15 +8,26 @@ import { deleteComment } from './utils/deleteComment';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AuthContext } from '../Layout';
+import ModalBox from '../ModalBox';
 
 const Comment = ({ comment }) => {
   const [userInfo, setUserInfo] = useState();
   const { currentUser } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
   const commentUserId = comment.userId;
 
-  // write logic to add modal for delete or cancel box
-  const handleDeleteComment = (postId, commentId) => {
-    deleteComment(postId, commentId);
+  const router = useRouter();
+
+  const handleDeleteComment = (returnValue) => {
+    if (returnValue === 'delete') {
+      deleteComment(comment.postId, comment.commentId);
+      router.reload();
+      setIsOpen(false);
+    }
+    if (returnValue === 'cancel') {
+      setIsOpen(false);
+      return;
+    }
   };
 
   const getUserInfo = async () => {
@@ -28,6 +40,10 @@ const Comment = ({ comment }) => {
   useEffect(() => {
     getUserInfo();
   }, []);
+
+  if (isOpen) {
+    return <ModalBox callback={handleDeleteComment} />;
+  }
 
   if (userInfo) {
     return (
@@ -54,9 +70,7 @@ const Comment = ({ comment }) => {
             className={
               commentUserId === currentUser.uid ? 'block' : 'hidden'
             }
-            onClick={() =>
-              handleDeleteComment(comment.postId, comment.commentId)
-            }
+            onClick={() => setIsOpen(true)}
           >
             <BsTrash size={20} className="cursor-pointer" />
           </span>
