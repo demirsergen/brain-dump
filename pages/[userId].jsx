@@ -25,7 +25,7 @@ const UserProfile = () => {
   const { userId } = router.query;
 
   const getUserInfo = async () => {
-    const docRef = await doc(db, 'users', userId);
+    const docRef = doc(db, 'users', userId);
     const data = await getDoc(docRef);
     setUserProfile(data?.data());
   };
@@ -44,6 +44,13 @@ const UserProfile = () => {
 
       return unsubscribe;
     });
+  };
+
+  const getUserFriends = () => {
+    if (!user) return router.push('/auth/login');
+
+    // const friendsRef = collection(db, `users/${userId}/friends`)
+    // store data in state
   };
 
   useEffect(() => {
