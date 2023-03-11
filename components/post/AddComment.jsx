@@ -16,7 +16,7 @@ const AddComment = ({ post }) => {
     }
   }, [user]);
 
-  const submitComment = async (e) => {
+  const handleSubmitComment = async (e) => {
     e.preventDefault();
     addComment(post.id, user.uid, comment);
     setComment('');
@@ -33,7 +33,7 @@ const AddComment = ({ post }) => {
       />
       <button
         className="bg-teal-500 p-1 text-teal-50 text-sm"
-        onClick={submitComment}
+        onClick={handleSubmitComment}
       >
         Comment
       </button>
