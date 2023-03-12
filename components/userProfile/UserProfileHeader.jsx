@@ -1,12 +1,8 @@
-import React, { useContext } from 'react';
 import Image from 'next/image';
 import defaultAvatar from '../../public/default-avatar.svg';
 import UserProfileHeaderButtons from './UserProfileHeaderButtons';
-import { AuthContext } from '../Layout';
 
-const UserProfileHeader = () => {
-  const { currentUser } = useContext(AuthContext);
-
+const UserProfileHeader = ({ currentUser }) => {
   if (currentUser) {
     return (
       <div className="flex items-center gap-2 border-b-2 pb-2">

@@ -4,8 +4,6 @@ import {
   query,
   where,
   onSnapshot,
-  doc,
-  deleteDoc,
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useRouter } from 'next/router';
@@ -13,6 +11,7 @@ import Post from '../post/Post';
 import Modal from '../Modal';
 import { AuthContext } from '../Layout';
 import PostButtons from './PostButtons';
+import { deletePost } from './utils/deletePost';
 
 const UserPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
@@ -38,11 +37,6 @@ const UserPosts = () => {
     return unsubscribe;
   };
 
-  const deletePost = async (id) => {
-    const postRef = doc(db, 'posts', id);
-    await deleteDoc(postRef);
-  };
-
   useEffect(() => {
     getUserPosts();
   }, []);
@@ -62,6 +56,7 @@ const UserPosts = () => {
   if (loading) {
     return <div className="text-red-900">Loading...</div>;
   }
+
   return (
     <div className="p-2 shadow rounded my-2">
       <h1 className="text-teal-50 text-center font-bold">My Posts</h1>

@@ -1,29 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
-import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { signout } from './utils/signout';
 
 const UserProfileHeaderButtons = () => {
-  const signout = async () => {
-    await signOut(auth)
-      .then(() => {
-        router.push('/auth/login');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
   return (
-    <div className="flex ml-auto gap-2">
-      <Link href="/updateprofile" className="block">
-        <button className="bg-teal-500 p-2 rounded text-teal-50 text-sm ml-auto">
+    <div className="flex item-center justify-end gap-2 ml-auto">
+      <Link href="/updateprofile">
+        <button className="bg-teal-500 p-2 rounded text-teal-50 text-sm">
           Update
         </button>
       </Link>
-      <Link href="/auth/login" className="block">
+      <Link href="/auth/login">
         <button
           onClick={signout}
-          className="bg-teal-500 p-2 rounded text-teal-50 text-sm ml-auto"
+          className="bg-teal-500 p-2 rounded text-teal-50 text-sm"
         >
           Sign Out
         </button>
