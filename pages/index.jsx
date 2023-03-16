@@ -40,6 +40,8 @@ export default function Home() {
     }
   }, [user]);
 
+  const environment = process.env.NODE_ENV;
+
   return (
     <div className="flex-1">
       <Head>
@@ -58,7 +60,14 @@ export default function Home() {
           Latest Posts
         </h1>
         {allPosts?.map((post) => (
-          <div key={post.id} className="flex ">
+          <div
+            key={post.id}
+            className={
+              environment === 'development'
+                ? 'flex mx-auto w-full'
+                : 'flex mx-auto w-2/3'
+            }
+          >
             <Votes post={post} />
             <Post post={post} />
           </div>
