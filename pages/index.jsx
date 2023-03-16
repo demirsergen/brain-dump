@@ -58,7 +58,7 @@ export default function Home() {
           Latest Posts
         </h1>
         {allPosts?.map((post) => (
-          <div key={post.id} className="flex">
+          <div key={post.id} className="flex ">
             <Votes post={post} />
             <Post post={post} />
           </div>

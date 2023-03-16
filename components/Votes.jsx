@@ -7,7 +7,7 @@ import { AuthContext } from '../components/Layout';
 const Votes = ({ post }) => {
   const [voteCount, setVoteCount] = useState(0);
   const [voted, setVoted] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
   const getVoteCount = async () => {
@@ -16,7 +16,7 @@ const Votes = ({ post }) => {
     const documentData = document.data();
     const { postVotes } = documentData;
 
-    const existingVote = postVotes.includes(user?.uid);
+    const existingVote = postVotes.includes(currentUser?.uid);
     if (existingVote) setVoted(true);
 
     setVoteCount(postVotes.length);
@@ -51,11 +51,11 @@ const Votes = ({ post }) => {
     getVoteCount();
   }, [voted]);
 
-  if (user && !loading) {
+  if (currentUser) {
     return (
       <div className="flex flex-col items-center justify-center p-2 gap-2 text-teal-50">
         <button
-          onClick={() => onVote(post.id, user.uid)}
+          onClick={() => onVote(post.id, currentUser.uid)}
           className={voted ? 'text-green-400' : ''}
         >
           <AiOutlineArrowUp size={20} />
