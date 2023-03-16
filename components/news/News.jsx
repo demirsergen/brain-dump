@@ -5,10 +5,7 @@ import Image from 'next/image';
 // do not display the news section in production
 
 const News = ({ news }) => {
-  if (process.env.NODE_ENV === 'production') {
-    return <div>no news</div>;
-  }
-  if (process.env.NODE_ENV === 'development') {
+  if (news) {
     return (
       <div className="bg-slate-500 p-2 rounded flex flex-col gap-2 text-sm">
         <Image
