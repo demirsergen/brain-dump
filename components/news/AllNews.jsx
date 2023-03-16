@@ -27,7 +27,7 @@ const AllNews = () => {
   }, []);
 
   if (process.env.NODE_ENV === 'production') {
-    return <div>no news</div>;
+    return null;
   }
 
   if (currentUser && process.env.NODE_ENV === 'development') {
