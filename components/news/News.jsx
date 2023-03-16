@@ -1,6 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 
+// either find a new api that can be used with free tier or
+// do not display the news section in production
+
 const News = ({ news }) => {
   if (news) {
     return (
