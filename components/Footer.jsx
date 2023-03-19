@@ -11,6 +11,17 @@ const Footer = () => {
           braindump
         </button>
       </Link>
+      <ul className="flex flex-col">
+        <li>
+          <a
+            href="https://github.com/demirsergen/brain-dump"
+            className="text-teal-50"
+          >
+            Github
+          </a>
+        </li>
+      </ul>
+
       <p className=" text-gray-400 font-bold">© 2022 braindump.</p>
     </footer>
   );
