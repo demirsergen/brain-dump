@@ -1,7 +1,7 @@
 import { BsGoogle } from 'react-icons/bs';
 import { auth, db } from '../../firebase';
 import { useRouter } from 'next/router';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import NoteForLogin from '../../components/NoteForLogin';
 import {
