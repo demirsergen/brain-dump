@@ -46,7 +46,9 @@ const UserProfile = () => {
     });
   };
 
-  const getUserFriends = () => {
+  // instead of adding friends, let's make it follow - unfollow
+
+  const getFollowedUsers = () => {
     if (!user) return router.push('/auth/login');
 
     // const friendsRef = collection(db, `users/${userId}/friends`)
