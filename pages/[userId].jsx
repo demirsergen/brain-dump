@@ -51,7 +51,8 @@ const UserProfile = () => {
   const getFollowedUsers = () => {
     if (!user) return router.push('/auth/login');
 
-    // const friendsRef = collection(db, `users/${userId}/friends`)
+    // const followersRef = collection(db, `users/${userId}/followers`)
+    // const followedRef = collection(db, `users/${userId}/followed`)
     // store data in state
   };
 
@@ -81,9 +82,9 @@ const UserProfile = () => {
         }`}</h1>
         <span className="border-2 rounded p-1 cursor-pointer">
           {!alreadyFriends ? (
-            <CgUserAdd color="white" title="Add Friend" />
+            <CgUserAdd color="white" title="Follow" />
           ) : (
-            <CgUserRemove color="white" title="Remove Friend" />
+            <CgUserRemove color="white" title="Unfollow" />
           )}
         </span>
       </div>
