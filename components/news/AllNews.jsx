@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import News from './News';
 import { getAllNews } from './utils/getAllNews';
+import { getGoogleNews } from './utils/getGoogleNews';
 import { AuthContext } from '../Layout';
 
 const AllNews = () => {
@@ -10,8 +11,13 @@ const AllNews = () => {
   const { currentUser } = useContext(AuthContext);
 
   const getData = async () => {
-    const data = await getAllNews();
-    setNews(data);
+    if (currentUser && process.env.NODE_ENV === 'development') {
+      const data = await getAllNews();
+      setNews(data);
+    } else if (currentUser && process.env.NODE_ENV === 'production') {
+      const data = await getGoogleNews();
+      setNews(data);
+    }
   };
 
   const handleSearch = async (e) => {
