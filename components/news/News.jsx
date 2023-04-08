@@ -17,7 +17,7 @@ const News = ({ news }) => {
         />
         <h3>{news.title}</h3>
         <a
-          href={news.url}
+          href={news.url || news.link}
           className="p-2 bg-slate-600 rounded text-center"
           target="_blank"
           rel="noreferrer"
