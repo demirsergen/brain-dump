@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
 
   const getUpdatedUserInfo = async () => {
     if (user) {
-      const docRef = doc(db, 'users', user?.uid);
+      const docRef = doc(db, 'users', user.uid);
       const data = await getDoc(docRef);
       setCurrentUser(data.data());
     } else {
