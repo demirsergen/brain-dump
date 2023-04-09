@@ -25,6 +25,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     getUpdatedUserInfo();
   }, [user]);
+
   return (
     <AuthContext.Provider value={{ currentUser }}>
       <div className="min-h-screen font-poppins bg-slate-800 flex flex-col justify-between items-center">
