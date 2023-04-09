@@ -14,5 +14,5 @@ export async function getGoogleNews(query) {
   const response = await fetch(url, options);
   const data = await response.json();
 
-  return data.news.news;
+  return data.news?.news;
 }
