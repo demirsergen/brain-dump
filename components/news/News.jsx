@@ -1,15 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
+import defaultNews from '../../public/images/default-news.jpg';
 
 const News = ({ news }) => {
   if (news) {
     return (
       <div className="bg-slate-500 p-2 rounded flex flex-col gap-2 text-sm">
         <Image
-          src={
-            news.urlToImage ||
-            'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80'
-          }
+          src={news.urlToImage || defaultNews}
           alt="news-image"
           width={250}
           height={100}
