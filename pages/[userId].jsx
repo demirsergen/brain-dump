@@ -56,6 +56,8 @@ const UserProfile = () => {
     // store data in state
   };
 
+  // THIS IS THE NEW FEATURE, JUST WORK ON IT
+
   useEffect(() => {
     if (user?.uid === userId) {
       router.push('/profile');
