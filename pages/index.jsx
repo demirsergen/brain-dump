@@ -53,7 +53,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* change icon!! */}
+      {/* change icon!!! */}
 
       <div className="bg-slate-600 rounded p-2 flex flex-col gap-2 flex-grow">
         <h1 className="text-teal-50 text-center font-bold">
