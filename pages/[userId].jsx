@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import defaultAvatar from '../public/default-avatar.svg';
-import { CgUserAdd, CgUserRemove } from 'react-icons/cg';
 import { useRouter } from 'next/router';
 import { db, auth } from '../firebase';
 import {
@@ -18,7 +17,7 @@ import Post from '../components/post/Post';
 const UserProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [userProfile, setUserProfile] = useState();
-  const [alreadyFriends, setAlreadyFriends] = useState(false);
+  const [alreadyFollowed, setAlreadyFollowed] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
 
   const router = useRouter();
@@ -82,12 +81,8 @@ const UserProfile = () => {
           userProfile?.username ||
           'Anonymous'
         }`}</h1>
-        <span className="border-2 rounded p-1 cursor-pointer">
-          {!alreadyFriends ? (
-            <CgUserAdd color="white" title="Follow" />
-          ) : (
-            <CgUserRemove color="white" title="Unfollow" />
-          )}
+        <span className="border-2 rounded p-1 text-sm cursor-pointer text-white">
+          {!alreadyFollowed ? 'Follow' : 'Unfollow'}
         </span>
       </div>
 
