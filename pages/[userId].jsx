@@ -45,11 +45,12 @@ const UserProfile = () => {
     });
   };
 
-  const getFollowedUsers = () => {
+  const getFollowers = () => {
     if (!user) return router.push('/auth/login');
 
-    // const followersRef = collection(db, `users/${userId}/followers`)
-    // const followedRef = collection(db, `users/${userId}/followed`)
+    // const followedByRef = collection(db, `users/${userId}/followed`)
+    // const followingRef = collection(db, `users/${userId}/following`)
+
     // store data in state
   };
 
