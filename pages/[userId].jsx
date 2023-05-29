@@ -45,7 +45,7 @@ const UserProfile = () => {
     });
   };
 
-  const getFollowers = () => {
+  const handleFollow = () => {
     if (!user) return router.push('/auth/login');
 
     // const followedByRef = collection(db, `users/${userId}/followed`)
