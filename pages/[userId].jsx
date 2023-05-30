@@ -45,8 +45,34 @@ const UserProfile = () => {
     });
   };
 
-  const handleFollow = () => {
+  const handleFollow = async () => {
     if (!user) return router.push('/auth/login');
+
+    try {
+      // Create 'following' document for the user who clicked the button
+      await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('following')
+        .doc(userId)
+        .set({
+          following: true,
+        });
+
+      // Create 'followers' document for the user who is being followed
+      await firestore
+        .collection('users')
+        .doc(userId)
+        .collection('followers')
+        .doc(user.uid)
+        .set({
+          follower: true,
+        });
+
+      setIsFollowing(true);
+    } catch (error) {
+      console.error('Error following user:', error);
+    }
 
     // const followedByRef = collection(db, `users/${userId}/followed`)
     // const followingRef = collection(db, `users/${userId}/following`)
