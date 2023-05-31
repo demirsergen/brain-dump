@@ -45,6 +45,7 @@ const UserProfile = () => {
     });
   };
 
+  // FINISH UP THIS FUNCTION
   const handleFollow = async () => {
     if (!user) return router.push('/auth/login');
 
