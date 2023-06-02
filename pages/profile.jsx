@@ -1,13 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import UserProfileHeader from '../components/userProfile/UserProfileHeader';
 import UserPosts from '../components/userProfile/UserPosts';
 import { AuthContext } from '../components/Layout';
+import { useRouter } from 'next/router';
 
 const Profile = () => {
   const { currentUser } = useContext(AuthContext);
 
-  // find a way to incorporate IAC API into this app
-  // make it interesting and related to chicago
+  const router = useRouter();
+
+  if (!currentUser) {
+    router.push('/login');
+  }
 
   if (currentUser) {
     return (
