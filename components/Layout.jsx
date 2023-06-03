@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
         <Navbar />
         <main className="flex-grow flex items-start justify-between gap-4 w-2/3 mx-auto">
           {children}
-          <AllNews />
+          {/* <AllNews /> */}
         </main>
         <Footer />
       </div>

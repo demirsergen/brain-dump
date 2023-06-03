@@ -1,15 +1,16 @@
 import Head from 'next/head';
 import Post from '../components/post/Post';
+import Votes from '../components/Votes';
+import LandingPage from '../components/LandingPage';
 import { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-} from 'firebase/firestore';
+// import {
+//   collection,
+//   query,
+//   orderBy,
+//   onSnapshot,
+// } from 'firebase/firestore';
 import { db, auth } from '../firebase';
-import Votes from '../components/Votes';
 import { useRouter } from 'next/router';
 
 export default function Home() {
@@ -18,21 +19,21 @@ export default function Home() {
 
   const route = useRouter();
 
-  const getAllPosts = async () => {
-    const postCollectionRef = collection(db, 'posts');
-    const q = query(postCollectionRef, orderBy('timestamp', 'desc'));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setAllPosts(
-        snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
-    });
+  // const getAllPosts = async () => {
+  //   const postCollectionRef = collection(db, 'posts');
+  //   const q = query(postCollectionRef, orderBy('timestamp', 'desc'));
+  //   const unsubscribe = onSnapshot(q, (snapshot) => {
+  //     setAllPosts(
+  //       snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+  //     );
+  //   });
 
-    return unsubscribe;
-  };
+  //   return unsubscribe;
+  // };
 
-  useEffect(() => {
-    getAllPosts();
-  }, []);
+  // useEffect(() => {
+  //   getAllPosts();
+  // }, []);
 
   useEffect(() => {
     if (!user) {
@@ -40,7 +41,7 @@ export default function Home() {
     }
   }, [user]);
 
-  const environment = process.env.NODE_ENV;
+  // const environment = process.env.NODE_ENV;
 
   return (
     <div className="flex-1">
@@ -52,7 +53,7 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon1.png" />
       </Head>
-      <div className="bg-slate-600 rounded p-2 flex flex-col gap-2 flex-grow">
+      {/* <div className="bg-slate-600 rounded p-2 flex flex-col gap-2 flex-grow">
         <h1 className="text-teal-50 text-center font-bold">
           Latest Posts
         </h1>
@@ -69,7 +70,8 @@ export default function Home() {
             <Post post={post} />
           </div>
         ))}
-      </div>
+      </div> */}
+      <LandingPage />
     </div>
   );
 }
