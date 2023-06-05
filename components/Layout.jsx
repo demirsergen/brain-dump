@@ -8,6 +8,8 @@ import Footer from './Footer';
 
 export const AuthContext = createContext();
 
+// work on comments
+
 const Layout = ({ children }) => {
   const [user, loading] = useAuthState(auth);
   const [currentUser, setCurrentUser] = useState();
