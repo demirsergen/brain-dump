@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Votes from './Votes';
 import Post from './post/Post';
 import {
