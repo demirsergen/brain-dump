@@ -3,12 +3,9 @@ import { auth, db } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import Navbar from './Navbar';
-import AllNews from './news/AllNews';
 import Footer from './Footer';
 
 export const AuthContext = createContext();
-
-// work on comments
 
 const Layout = ({ children }) => {
   const [user, loading] = useAuthState(auth);
@@ -34,7 +31,6 @@ const Layout = ({ children }) => {
         <Navbar />
         <main className="flex-grow flex items-start justify-between gap-4 w-2/3 mx-auto">
           {children}
-          {/* <AllNews /> */}
         </main>
         <Footer />
       </div>
