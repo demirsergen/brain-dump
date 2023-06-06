@@ -15,7 +15,7 @@ const LandingPage = () => {
           and authentic expression. Join our community and share your
           unfiltered thoughts with the world.
         </p>
-        <Link href="/login">
+        <Link href="/auth/login">
           <button className="bg-orange-500 block my-2 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
             Get Started
           </button>
