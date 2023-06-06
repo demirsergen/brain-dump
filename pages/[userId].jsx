@@ -24,9 +24,11 @@ const UserProfile = () => {
   const { userId } = router.query;
 
   const getUserInfo = async () => {
-    const docRef = doc(db, 'users', userId);
-    const data = await getDoc(docRef);
-    setUserProfile(data?.data());
+    if (userId) {
+      const docRef = doc(db, 'users', userId);
+      const data = await getDoc(docRef);
+      setUserProfile(data?.data());
+    }
   };
 
   const getUserPosts = async () => {

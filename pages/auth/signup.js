@@ -54,7 +54,7 @@ const Signup = () => {
   }, [userCred]);
 
   return (
-    <div className="shadow bg-slate-600 mt-16 p-4 w-full sm:w-3/4 md:w-2/4 lg:w-1/3 mx-auto rounded">
+    <div className="shadow bg-slate-600 mt-16 p-4 w-full sm:w-3/4 md:w-2/4 lg:w-2/3 mx-auto rounded">
       <h1 className="text-2xl font-medium text-center text-teal-50 ">
         Sign Up
       </h1>

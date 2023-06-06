@@ -3,7 +3,6 @@ import { auth, db } from '../../firebase';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import NoteForLogin from '../../components/NoteForLogin';
 import {
   useSignInWithGoogle,
   useSignInWithEmailAndPassword,
@@ -68,7 +67,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      route.push('/');
+      route.push('/dashboard');
     }
   }, [user]);
 
@@ -89,6 +88,7 @@ const Login = () => {
             type="email"
             name="email"
             value={signinForm.email}
+            placeholder="admin@admin.com"
             onChange={handleChange}
             className="w-3/4 rounded text-sm p-1"
           />
@@ -103,6 +103,7 @@ const Login = () => {
             value={signinForm.password}
             onChange={handleChange}
             className="w-3/4 rounded text-sm p-1"
+            placeholder="admin123"
           />
         </div>
         <div className="py-2 mx-auto">
@@ -128,7 +129,6 @@ const Login = () => {
           Continue with Google
         </button>
       </div>
-      <NoteForLogin />
     </div>
   );
 };
