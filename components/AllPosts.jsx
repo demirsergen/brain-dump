@@ -9,6 +9,8 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 
+// make this fetch server side to fix flashing
+
 const AllPosts = () => {
   const [allPosts, setAllPosts] = useState();
 
