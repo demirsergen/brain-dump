@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../firebase';
 import { useRouter } from 'next/router';
 import { setDoc, doc } from 'firebase/firestore';
+import { AuthContext } from '../../components/Layout';
 
 const Signup = () => {
+  const { currentUser } = useContext(AuthContext);
   const [signupForm, setSignupForm] = useState({
     email: '',
     password: '',
@@ -19,7 +21,7 @@ const Signup = () => {
     userError,
   ] = useCreateUserWithEmailAndPassword(auth);
 
-  const route = useRouter();
+  const router = useRouter();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -36,7 +38,7 @@ const Signup = () => {
       signupForm.email,
       signupForm.password
     ).then(() => {
-      route.push('/profile');
+      router.push('/profile');
     });
   };
 
@@ -52,6 +54,12 @@ const Signup = () => {
       createUserDocument(userCred.user);
     }
   }, [userCred]);
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push('/profile');
+    }
+  }, [currentUser]);
 
   return (
     <div className="shadow bg-slate-600 mt-16 p-4 w-full sm:w-3/4 md:w-2/4 lg:w-2/3 mx-auto rounded">
