@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Manifest = () => {
@@ -11,11 +12,11 @@ const Manifest = () => {
           Liberating minds through unfiltered thought.
         </p>
         <div className="mt-8 text-sm text-gray-500">
-          <h2 className="font-bold mb-2">Slogan:</h2>
+          <h2 className="font-bold mb-2 text-lg">Slogan:</h2>
           <p className="text-justify mb-2">
             Liberty in Expression, Transparency in Thought{' '}
           </p>
-          <h2 className="font-bold mb-2">Manifesto:</h2>
+          <h2 className="font-bold mb-2 text-lg">Manifesto:</h2>
           <p className="text-justify mb-2">
             At Braindump, we believe in the intrinsic value of
             unfiltered thought. Inspired by George Orwell's visionary
@@ -53,6 +54,9 @@ const Manifest = () => {
             Step into the realm of Braindump, where thoughts run wild
             and minds are set free.
           </p>
+          <button className="block mx-auto p-2 bg-teal-500 text-white rounded">
+            <Link href="/auth/signup">Join Us</Link>
+          </button>
         </div>
       </div>
     </div>
