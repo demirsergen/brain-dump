@@ -16,7 +16,7 @@ const SearchBar = () => {
       <input
         type="submit"
         value="Search"
-        className="p-1 text-white bg-teal-500 rounded"
+        className="p-1 text-white bg-teal-500 rounded cursor-pointer"
       />
     </form>
   );
