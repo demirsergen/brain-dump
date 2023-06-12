@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ currentUser }}>
-      <div className="min-h-screen font-poppins bg-slate-800 flex flex-col justify-between items-center">
+      <div className="min-h-screen font-poppins bg-slate-900 flex flex-col justify-between items-center">
         <Navbar />
         <main className="flex-grow flex items-start justify-between gap-4 w-2/3 mx-auto">
           {children}
