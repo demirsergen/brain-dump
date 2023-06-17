@@ -50,7 +50,7 @@ const Addpost = () => {
       tag: '',
     });
 
-    router.push('/');
+    router.push('/dashboard');
   };
 
   const checkForEdit = () => {
