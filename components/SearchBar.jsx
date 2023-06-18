@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 const SearchBar = () => {
   const [input, setInput] = useState('');
 
+  // implement searching functionality
+
   const handleSubmit = () => {};
   return (
     <form
