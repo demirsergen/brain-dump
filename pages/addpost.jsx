@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { auth, db } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect, useState } from 'react';
+import ToggleButton from '../components/ToggleButton';
 import {
   addDoc,
   collection,
@@ -82,7 +83,8 @@ const Addpost = () => {
   return (
     <div className="py-4 bg-slate-600 rounded md:w-1/2 mx-auto flex-1">
       <h1 className="text-teal-50 text-center uppercase font-bold">
-        {routerData.id ? 'Update Your Idea' : 'Share a new Idea'}
+        {/* find a new font family for this */}
+        {routerData.id ? 'Update Your Idea' : 'Tell Us How You Feel'}
       </h1>
       <form
         className="px-2"
@@ -118,6 +120,7 @@ const Addpost = () => {
             onChange={handleChange}
           />
         </div>
+        <ToggleButton />
         <button
           type="submit"
           className="bg-teal-500 text-teal-50 w-full text-bold my-2 p-2 rounded block mx-auto"
