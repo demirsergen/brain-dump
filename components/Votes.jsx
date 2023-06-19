@@ -10,8 +10,6 @@ const Votes = ({ post }) => {
   const { currentUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
-  // clean up this code.
-
   const getVoteCount = async () => {
     const postRef = doc(db, 'posts', post.id);
     const document = await getDoc(postRef);
