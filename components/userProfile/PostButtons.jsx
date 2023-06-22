@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const PostButtons = ({ setShowModal, post, setDeleteId }) => {
   return (
-    <div className="flex items-center gap-2 px-2">
+    <div className="flex gap-2 px-2 justify-end">
       <button
         className="flex items-center gap-2 text-red-500 font-medium bg-teal-50 rounded p-1"
         onClick={() => {
