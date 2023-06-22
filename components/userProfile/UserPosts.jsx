@@ -58,7 +58,7 @@ const UserPosts = () => {
   }
 
   return (
-    <div className="p-2 shadow rounded my-2">
+    <div className="p-2 shadow rounded my-2 flex flex-col gap-2">
       <h1 className="text-teal-50 text-center font-bold">My Posts</h1>
       {userPosts?.map((post) => {
         return (
