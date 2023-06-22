@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <nav className="flex items-center justify-between p-4 md:w-1/2 lg:w-2/3 mx-auto">
-      <Link href="/">
+      <Link href="/dashboard">
         <button className=" text-teal-50 font-bold">
           {' '}
           braindump

@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 
-const SearchBar = () => {
-  const [input, setInput] = useState('');
+const SearchBar = ({ getSearchResults }) => {
+  const [query, setQuery] = useState('');
 
   // implement searching functionality
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (query) {
+      await getSearchResults(query);
+    }
+  };
   return (
     <form
       onSubmit={handleSubmit}
@@ -13,8 +18,8 @@ const SearchBar = () => {
     >
       <input
         type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for keywords..."
         className="flex-grow p-1 rounded rounded-r-none"
       />
