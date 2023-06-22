@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import UserProfileHeader from '../components/userProfile/UserProfileHeader';
 import UserPosts from '../components/userProfile/UserPosts';
 import { AuthContext } from '../components/Layout';
@@ -9,9 +9,11 @@ const Profile = () => {
 
   const router = useRouter();
 
-  // if (!currentUser) {
-  //   router.push('/login');
-  // }
+  useEffect(() => {
+    if (!currentUser) {
+      router.push('auth/login');
+    }
+  }, []);
 
   if (currentUser) {
     return (
