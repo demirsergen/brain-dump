@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 const SearchBar = ({ getSearchResults }) => {
   const [query, setQuery] = useState('');
 
-  // implement searching functionality
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (query) {
