@@ -13,15 +13,19 @@ import { db } from '../firebase';
 
 const Dashboard = () => {
   const [filteredPosts, setFilteredPosts] = useState();
+  const [filterQuery, setFilterQuery] = useState('');
+  const [isFiltered, setIsFiltered] = useState(false);
 
   const getSearchResults = async (searchQuery) => {
     const postsRef = collection(db, 'posts');
     const q = query(postsRef, where('tag', '==', searchQuery));
+    setFilterQuery(searchQuery);
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setFilteredPosts(
         snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       );
+      setIsFiltered(true);
     });
 
     return unsubscribe;
@@ -31,6 +35,9 @@ const Dashboard = () => {
     return (
       <div className="shadow p-2 bg-slate-600 rounded mx-auto w-2/3">
         <SearchBar getSearchResults={getSearchResults} />
+        {filterQuery && (
+          <p className="text-white">Filter: {filterQuery}</p>
+        )}
         {filteredPosts.map((post) => (
           <div key={post.id} className={'flex mx-auto w-full'}>
             <Votes post={post} />
