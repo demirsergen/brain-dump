@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import AllPosts from '../components/AllPosts';
 import SearchBar from '../components/SearchBar';
-import Votes from '../components/Votes';
-import Post from '../components/post/Post';
+import FilteredPosts from '../components/FilteredPosts';
 import {
   collection,
   query,
@@ -35,15 +34,11 @@ const Dashboard = () => {
     return (
       <div className="shadow p-2 bg-slate-600 rounded mx-auto w-2/3">
         <SearchBar getSearchResults={getSearchResults} />
-        {filterQuery && (
-          <p className="text-white">Filter: {filterQuery}</p>
-        )}
-        {filteredPosts.map((post) => (
-          <div key={post.id} className={'flex mx-auto w-full'}>
-            <Votes post={post} />
-            <Post post={post} />
-          </div>
-        ))}{' '}
+        <FilteredPosts
+          filteredPosts={filteredPosts}
+          filterQuery={filterQuery}
+          isFiltered={isFiltered}
+        />
       </div>
     );
   }
