@@ -52,11 +52,23 @@ const Dashboard = () => {
     return (
       <div className="shadow p-2 bg-slate-600 rounded mx-auto w-2/3">
         <SearchBar getSearchResults={getSearchResults} />
-        <FilteredPosts
-          filteredPosts={filteredPosts}
-          filterQuery={filterQuery}
-          isFiltered={isFiltered}
-        />
+        <button
+          onClick={() => {
+            setIsFiltered(false);
+            setFilteredPosts(null);
+
+            getAllPosts();
+          }}
+          className="text-white text-sm bg-teal-600 px-2 py-1 m-1 rounded"
+        >
+          All
+        </button>
+        {isFiltered && (
+          <span className="text-white text-sm">
+            Filter: {filterQuery}
+          </span>
+        )}
+        <FilteredPosts filteredPosts={filteredPosts} />
       </div>
     );
   }

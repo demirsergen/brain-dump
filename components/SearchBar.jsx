@@ -9,6 +9,7 @@ const SearchBar = ({ getSearchResults }) => {
     if (query) {
       await getSearchResults(query);
       setMessage('');
+      setQuery('');
     } else {
       setMessage('Enter a tag to search...');
     }
