@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const ToggleButton = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   return (
-    <label class="relative inline-flex items-center cursor-pointer">
+    <label class="relative inline-flex items-center cursor-pointer mx-1">
       <input
         type="checkbox"
         class="sr-only peer"
