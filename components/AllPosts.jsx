@@ -1,35 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import Votes from './Votes';
 import Post from './post/Post';
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-} from 'firebase/firestore';
-import { db } from '../firebase';
 
-// make this fetch server side to fix flashing
-
-const AllPosts = () => {
-  const [allPosts, setAllPosts] = useState();
-
-  const getAllPosts = async () => {
-    const postCollectionRef = collection(db, 'posts');
-    const q = query(postCollectionRef, orderBy('timestamp', 'desc'));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setAllPosts(
-        snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
-    });
-
-    return unsubscribe;
-  };
-
-  useEffect(() => {
-    getAllPosts();
-  }, []);
-
+const AllPosts = ({ allPosts }) => {
   const environment = process.env.NODE_ENV;
 
   return (
