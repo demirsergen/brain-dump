@@ -56,8 +56,8 @@ const UpdateAvatar = () => {
     setFile(null);
   };
   return (
-    <div className="px-4">
-      <h1 className="text-teal-50 text-center uppercase font-bold">
+    <div className="px-4 text-sm">
+      <h1 className="text-teal-50 text-center font-bold">
         Edit Avatar
       </h1>
       <form className="px-4 flex flex-col gap-2">

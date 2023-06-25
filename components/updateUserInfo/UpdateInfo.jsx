@@ -34,9 +34,9 @@ const UpdateInfo = () => {
     setFullname('');
   };
   return (
-    <div className="px-4">
-      <h1 className="text-teal-50 text-center uppercase font-bold">
-        Edit Info
+    <div className="px-4 text-sm">
+      <h1 className="text-teal-50 text-center font-bold">
+        Edit Profile
       </h1>
       <form className="px-4 flex flex-col gap-2">
         <div className="rounded">
