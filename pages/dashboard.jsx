@@ -8,12 +8,13 @@ import {
   onSnapshot,
   where,
   orderBy,
+  getDocs,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const Dashboard = () => {
   const [allPosts, setAllPosts] = useState();
-  const [filteredPosts, setFilteredPosts] = useState();
+  const [filteredPosts, setFilteredPosts] = useState(null);
   const [filterQuery, setFilterQuery] = useState('');
   const [isFiltered, setIsFiltered] = useState(false);
 
@@ -22,14 +23,14 @@ const Dashboard = () => {
     const q = query(postsRef, where('tag', '==', searchQuery));
     setFilterQuery(searchQuery);
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setFilteredPosts(
-        snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
-      setIsFiltered(true);
+    const querySnapshot = await getDocs(q);
+    const docs = [];
+
+    querySnapshot.forEach((doc) => {
+      docs.push({ ...doc.data(), id: doc.id });
     });
 
-    return unsubscribe;
+    setFilteredPosts([...docs]);
   };
 
   const getAllPosts = async () => {
@@ -49,6 +50,7 @@ const Dashboard = () => {
   }, []);
 
   if (filteredPosts) {
+    console.log(filteredPosts);
     return (
       <div className="shadow p-2 bg-slate-600 rounded mx-auto w-2/3">
         <SearchBar getSearchResults={getSearchResults} />
@@ -56,6 +58,7 @@ const Dashboard = () => {
           onClick={() => {
             setIsFiltered(false);
             setFilteredPosts(null);
+            setFilterQuery('');
 
             getAllPosts();
           }}
