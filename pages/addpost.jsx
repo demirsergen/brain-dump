@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { auth, db } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect, useState } from 'react';
-import ToggleButton from '../components/ToggleButton';
 import {
   addDoc,
   collection,
@@ -120,7 +119,6 @@ const Addpost = () => {
             onChange={handleChange}
           />
         </div>
-        <ToggleButton />
         <button
           type="submit"
           className="bg-teal-500 text-teal-50 w-full text-bold my-2 p-2 rounded block mx-auto"
