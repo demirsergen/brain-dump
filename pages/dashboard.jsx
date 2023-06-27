@@ -50,7 +50,6 @@ const Dashboard = () => {
   }, []);
 
   if (filteredPosts) {
-    console.log(filteredPosts);
     return (
       <div className="shadow p-2 bg-slate-600 rounded mx-auto w-2/3">
         <SearchBar getSearchResults={getSearchResults} />
