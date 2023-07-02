@@ -13,6 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon1.png" />
       </Head>
       <LandingPage />
+      <h1>braindump</h1>
     </div>
   );
 }
