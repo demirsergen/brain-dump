@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <div
+    class="flex-1"
+  >
+    <div
+      class="bg-teal-500 min-h-screen rounded-xl flex items-center justify-center"
+    >
+      <div
+        class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-lg"
+      >
+        <h1
+          class="text-4xl font-bold text-teal-500 mb-6 text-center"
+        >
+          Braindump
+        </h1>
+        <p
+          class="text-lg text-gray-700 mb-8"
+        >
+          Liberating minds through unfiltered thought.
+        </p>
+        <p
+          class="text-gray-700 mb-4"
+        >
+          At Braindump, we believe in the power of untamed imagination and authentic expression. Join our community and share your unfiltered thoughts with the world.
+        </p>
+        <button
+          class="bg-orange-500 block my-2 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded mx-auto"
+        >
+          Get Started
+        </button>
+        <button
+          class="bg-orange-500 block hover:bg-orange-600 text-white font-bold py-2 px-4 rounded mx-auto"
+        >
+          Read our Manifest
+        </button>
+      </div>
+    </div>
+    <h1>
+      braindump
+    </h1>
+  </div>
+</div>
+`;
