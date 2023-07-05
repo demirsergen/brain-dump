@@ -38,9 +38,6 @@ exports[`renders homepage unchanged 1`] = `
         </button>
       </div>
     </div>
-    <h1>
-      braindump
-    </h1>
   </div>
 </div>
 `;
