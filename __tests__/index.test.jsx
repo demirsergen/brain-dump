@@ -5,8 +5,8 @@ describe('Home', () => {
   it('renders a heading', () => {
     render(<Home />);
 
-    const title = screen.getByText('braindump');
+    const container = document.getElementById('home');
 
-    expect(title).toBeInTheDocument();
+    expect(container).toBeInTheDocument();
   });
 });

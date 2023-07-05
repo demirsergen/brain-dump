@@ -3,7 +3,7 @@ import LandingPage from '../components/LandingPage';
 
 export default function Home() {
   return (
-    <div className="flex-1">
+    <div className="flex-1" id="home">
       <Head>
         <title>braindump</title>
         <meta

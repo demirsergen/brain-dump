@@ -4,6 +4,7 @@ exports[`renders homepage unchanged 1`] = `
 <div>
   <div
     class="flex-1"
+    id="home"
   >
     <div
       class="bg-teal-500 min-h-screen rounded-xl flex items-center justify-center"
