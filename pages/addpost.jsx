@@ -81,9 +81,9 @@ const Addpost = () => {
 
   return (
     <div className="py-4 bg-slate-600 rounded w-2/3 mx-auto">
-      <h1 className="text-teal-50 text-center uppercase font-bold">
+      <h1 className="text-teal-50 text-center font-bold">
         {/* find a new font family for this */}
-        {routerData.id ? 'Update Your Idea' : 'Tell Us How You Feel'}
+        {routerData.id ? 'Update Your Post' : 'Add a New Post'}
       </h1>
       <form
         className="px-2"
@@ -91,17 +91,18 @@ const Addpost = () => {
       >
         <div className="p-2 rounded">
           <label htmlFor="post" className="text-teal-50">
-            Post your idea:
+            Post:
           </label>
           <br />
           <textarea
             name="text"
             cols="30"
             rows="7"
-            className="w-full bg-gray-100 p-2 rounded "
+            className="w-full bg-gray-100 p-1 rounded mt-1"
             placeholder="Let your mind speak..."
             value={post.text}
             onChange={handleChange}
+            id="post"
             required
           ></textarea>
         </div>
@@ -113,7 +114,8 @@ const Addpost = () => {
           <input
             type="text"
             name="tag"
-            className="w-full bg-gray-100 p-2 rounded"
+            className="w-full bg-gray-100 p-1 rounded mt-1"
+            id="tag"
             placeholder="daily, friendship, tech?"
             value={post.tag}
             onChange={handleChange}
