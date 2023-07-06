@@ -16,7 +16,6 @@ const Dashboard = () => {
   const [allPosts, setAllPosts] = useState();
   const [filteredPosts, setFilteredPosts] = useState(null);
   const [filterQuery, setFilterQuery] = useState('');
-  const [isFiltered, setIsFiltered] = useState(false);
 
   const getSearchResults = async (searchQuery) => {
     const postsRef = collection(db, 'posts');
@@ -55,7 +54,6 @@ const Dashboard = () => {
         <SearchBar getSearchResults={getSearchResults} />
         <button
           onClick={() => {
-            setIsFiltered(false);
             setFilteredPosts(null);
             setFilterQuery('');
 
@@ -65,7 +63,7 @@ const Dashboard = () => {
         >
           All
         </button>
-        {isFiltered && (
+        {filteredPosts && (
           <span className="text-white text-sm">
             Filter: {filterQuery}
           </span>
