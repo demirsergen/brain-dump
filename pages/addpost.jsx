@@ -80,7 +80,7 @@ const Addpost = () => {
   };
 
   return (
-    <div className="py-4 bg-slate-600 rounded md:w-1/2 mx-auto flex-1">
+    <div className="py-4 bg-slate-600 rounded w-2/3 mx-auto">
       <h1 className="text-teal-50 text-center uppercase font-bold">
         {/* find a new font family for this */}
         {routerData.id ? 'Update Your Idea' : 'Tell Us How You Feel'}
