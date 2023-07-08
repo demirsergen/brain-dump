@@ -59,7 +59,11 @@ const UserPosts = () => {
 
   return (
     <div className="p-2 shadow rounded my-2 flex flex-col gap-2">
-      <h1 className="text-teal-50 text-center font-bold">My Posts</h1>
+      <h1 className="text-teal-50 text-center font-bold">
+        {userPosts.length < 1
+          ? 'You have not posted anything yet...'
+          : 'Your Posts'}
+      </h1>
       {userPosts?.map((post) => {
         return (
           <div key={post.id} className="bg-slate-500 rounded pb-2">
