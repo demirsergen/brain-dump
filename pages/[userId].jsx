@@ -95,7 +95,7 @@ const UserProfile = () => {
   }, [userId]);
 
   return (
-    <div className="shadow p-2  bg-slate-600 rounded md:w-1/2 mx-auto flex-1">
+    <div className="shadow p-2  bg-slate-600 rounded md:w-2/3 mx-auto">
       <div className="flex items-center gap-2 mb-2 p-2">
         <Image
           src={userProfile?.photoURL || defaultAvatar}
