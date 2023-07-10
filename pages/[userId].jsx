@@ -92,7 +92,7 @@ const UserProfile = () => {
 
     getUserPosts();
     getUserInfo();
-  }, [userId]);
+  }, []);
 
   return (
     <div className="shadow p-2  bg-slate-600 rounded md:w-2/3 mx-auto">
