@@ -3,7 +3,6 @@ import { SlOptions } from 'react-icons/sl';
 
 const Options = () => {
   // TODO
-  // - Three dot icon
   // - if open => display Edit and Delete buttons
   return (
     <div>
