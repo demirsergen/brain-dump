@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 const Manifest = () => {
+  // upate this.
   return (
     <div className="bg-gray-100 min-h-screen w-full flex items-center justify-center rounded">
       <div className=" mx-auto p-8 rounded-lg">
