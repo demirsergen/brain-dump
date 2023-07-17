@@ -8,7 +8,7 @@ import AddComment from './AddComment';
 import Comments from './Comments';
 import Options from '../userProfile/Options';
 
-const Post = ({ post }) => {
+const Post = ({ post, setShowModal, setDeleteId }) => {
   const [userProfile, setUserProfile] = useState();
 
   const getUserInfo = async () => {
@@ -43,7 +43,11 @@ const Post = ({ post }) => {
               </h1>
             </Link>
           </div>
-          <Options />
+          <Options
+            post={post}
+            setShowModal={setShowModal}
+            setDeleteId={setDeleteId}
+          />
         </div>
         <div className="bg-gray-100 rounded p-2 my-2">
           <p className="text-black text-sm">{post.text}</p>
