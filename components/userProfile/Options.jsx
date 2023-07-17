@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SlOptions } from 'react-icons/sl';
+import { CgOptions } from 'react-icons/cg';
 
 const Options = () => {
   // TODO
@@ -15,7 +15,7 @@ const Options = () => {
           setIsOpen((prev) => !prev);
         }}
       >
-        <SlOptions />
+        <CgOptions />
       </button>
     </div>
   );
