@@ -67,7 +67,11 @@ const UserPosts = () => {
       {userPosts?.map((post) => {
         return (
           <div key={post.id} className="bg-slate-500 rounded pb-2">
-            <Post post={post} />
+            <Post
+              post={post}
+              setShowModal={setShowModal}
+              setDeleteId={setDeleteId}
+            />
             <PostButtons
               setShowModal={setShowModal}
               post={post}
