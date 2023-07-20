@@ -23,7 +23,7 @@ const Post = ({ post, setShowModal, setDeleteId }) => {
 
   if (userProfile) {
     return (
-      <div className="bg-slate-500 w-full rounded py-2 px-4 my-1 grow">
+      <div className="bg-slate-500 w-full rounded py-2 p-4 my-1 grow relative">
         <div className="flex justify-between items-center">
           <div className="flex gap-2">
             <Link href={`/${post.userId}`}>
