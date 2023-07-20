@@ -72,11 +72,6 @@ const UserPosts = () => {
               setShowModal={setShowModal}
               setDeleteId={setDeleteId}
             />
-            <PostButtons
-              setShowModal={setShowModal}
-              post={post}
-              setDeleteId={setDeleteId}
-            />
           </div>
         );
       })}
