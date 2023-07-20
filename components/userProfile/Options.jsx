@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { CgOptions } from 'react-icons/cg';
 import OptionsOpen from '../OptionsOpen';
+import { useRouter } from 'next/router';
 
 const Options = ({ post, setShowModal, setDeleteId }) => {
-  // TODO
-  // - if open => display Edit and Delete buttons
-
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
 
   if (isOpen)
     return (
@@ -14,22 +14,23 @@ const Options = ({ post, setShowModal, setDeleteId }) => {
         post={post}
         setShowModal={setShowModal}
         setDeleteId={setDeleteId}
+        setIsOpen={setIsOpen}
       />
     );
 
-  return (
-    <div>
-      <button
-        className="flex items-center gap-2 text-teal-500 font-medium bg-teal-50 rounded p-1"
-        onClick={() => {
-          alert('clicked');
-          setIsOpen((prev) => !prev);
-        }}
-      >
-        <CgOptions />
-      </button>
-    </div>
-  );
+  if (router.pathname === '/profile')
+    return (
+      <div>
+        <button
+          className="flex items-center gap-2 text-teal-500 font-medium bg-teal-50 rounded p-1"
+          onClick={() => {
+            setIsOpen((prev) => !prev);
+          }}
+        >
+          <CgOptions />
+        </button>
+      </div>
+    );
 };
 
 export default Options;
