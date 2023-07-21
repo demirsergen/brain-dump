@@ -40,6 +40,7 @@ const UpdateInfo = () => {
     setMessage("You've successfully updated your info!");
     setUsername('');
     setFullname('');
+    setBio('');
   };
   return (
     <div className="px-4 text-sm">
