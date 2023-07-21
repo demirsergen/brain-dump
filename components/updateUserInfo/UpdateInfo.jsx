@@ -76,7 +76,6 @@ const UpdateInfo = () => {
           <br />
           <textarea
             type="text"
-            cols={10}
             rows={2}
             value={bio}
             name="bio"
