@@ -8,6 +8,7 @@ const UpdateInfo = () => {
   const [user, loading] = useAuthState(auth);
   const [fullname, setFullname] = useState('');
   const [username, setUsername] = useState('');
+  const [bio, setBio] = useState('');
   const [message, setMessage] = useState('');
 
   const batch = writeBatch(db);
@@ -16,15 +17,22 @@ const UpdateInfo = () => {
     e.preventDefault();
     setMessage('');
     const userRef = doc(db, 'users', user.uid);
-    if (username && fullname) {
+    if (username && fullname && bio) {
       batch.update(userRef, {
         username: username,
         displayName: fullname,
+        bio: bio,
       });
     } else if (fullname && !username) {
       batch.update(userRef, { displayName: fullname });
     } else if (!fullname && username) {
       batch.update(userRef, { username: username });
+    } else if (bio && !username && !fullname) {
+      batch.update(userRef, { bio: bio });
+    } else if (bio && username && !fullname) {
+      batch.update(userRef, { bio: bio, username: username });
+    } else if (bio && !username && fullname) {
+      batch.update(userRef, { bio: bio, fullname: fullname });
     } else {
       return;
     }
@@ -61,6 +69,20 @@ const UpdateInfo = () => {
             placeholder="New Fullname"
             className="w-full bg-gray-100 p-1 rounded "
             onChange={(e) => setFullname(e.target.value)}
+          />
+        </div>
+        <div className="rounded">
+          <label className="text-teal-50">Bio:</label>
+          <br />
+          <textarea
+            type="text"
+            cols={10}
+            rows={2}
+            value={bio}
+            name="bio"
+            placeholder="New Bio"
+            className="w-full bg-gray-100 p-1 rounded "
+            onChange={(e) => setBio(e.target.value)}
           />
         </div>
         <Button title="Update" handleClick={updateInfo} />
