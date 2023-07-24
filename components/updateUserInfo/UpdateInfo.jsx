@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { doc, writeBatch } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { db, auth } from '../../firebase';
@@ -12,6 +13,7 @@ const UpdateInfo = () => {
   const [message, setMessage] = useState('');
 
   const batch = writeBatch(db);
+  const router = useRouter();
 
   const updateInfo = async (e) => {
     e.preventDefault();
@@ -41,7 +43,9 @@ const UpdateInfo = () => {
     setUsername('');
     setFullname('');
     setBio('');
+    router.push('/profile');
   };
+
   return (
     <div className="px-4 text-sm">
       <h1 className="text-teal-50 text-center font-bold">
