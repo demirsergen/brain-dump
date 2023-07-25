@@ -13,6 +13,7 @@ import {
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Post from '../components/post/Post';
+import Votes from '../components/Votes';
 
 const UserProfile = () => {
   const [user, loading] = useAuthState(auth);
@@ -22,6 +23,7 @@ const UserProfile = () => {
 
   const router = useRouter();
   const { userId } = router.query;
+  const environment = process.env.NODE_ENV;
 
   const getUserInfo = async () => {
     if (userId) {
@@ -116,7 +118,19 @@ const UserProfile = () => {
 
       <div>
         {userPosts.map((post) => {
-          return <Post key={post.id} post={post} />;
+          return (
+            <div
+              key={post.id}
+              className={
+                environment === 'development'
+                  ? 'flex mx-auto w-full'
+                  : 'flex mx-auto w-2/3'
+              }
+            >
+              <Votes post={post} />
+              <Post post={post} />
+            </div>
+          );
         })}
       </div>
     </div>
