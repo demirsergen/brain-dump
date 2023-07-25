@@ -54,11 +54,11 @@ const Post = ({ post, setShowModal, setDeleteId }) => {
         </div>
         <div className="flex items-center justify-between w-full mb-2">
           <span className="text-teal-50 text-sm">#{post.tag}</span>
-          <div className="flex flex-col items-end  ">
+          <div className="flex items-center gap-2">
             <span className="text-teal-50 text-sm">
               {post?.timestamp?.toDate().toDateString()}
             </span>
-            <span className="text-teal-50 underline">
+            <span className="text-teal-50 underline text-sm">
               {post.updated ? 'Edited' : null}
             </span>
           </div>
