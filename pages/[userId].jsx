@@ -21,6 +21,8 @@ const UserProfile = () => {
   const [alreadyFollowed, setAlreadyFollowed] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
 
+  // check if user bio is visible to everyone
+
   const router = useRouter();
   const { userId } = router.query;
   const environment = process.env.NODE_ENV;
