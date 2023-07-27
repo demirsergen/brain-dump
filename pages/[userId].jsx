@@ -22,6 +22,7 @@ const UserProfile = () => {
   const [userPosts, setUserPosts] = useState([]);
 
   // check if user bio is visible to everyone
+  // if not create a new component as profileHeader
 
   const router = useRouter();
   const { userId } = router.query;
