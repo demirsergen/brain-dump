@@ -117,6 +117,9 @@ const UserProfile = () => {
         <span className="border-2 rounded p-1 text-sm cursor-pointer text-white">
           {!alreadyFollowed ? 'Follow' : 'Unfollow'}
         </span>
+        <p className="text-white">
+          {userProfile ? userProfile?.bio : 'No bdasdasdio'}
+        </p>
       </div>
 
       <div>
