@@ -52,43 +52,41 @@ const UserProfile = () => {
     });
   };
 
-  // FINISH UP THIS FUNCTION
-  const handleFollow = async () => {
-    if (!user) return router.push('/auth/login');
+  // // FINISH UP THIS FUNCTION
+  // const handleFollow = async () => {
+  //   if (!user) return router.push('/auth/login');
 
-    try {
-      // Create 'following' document for the user who clicked the button
-      await firestore
-        .collection('users')
-        .doc(user.uid)
-        .collection('following')
-        .doc(userId)
-        .set({
-          following: true,
-        });
+  //   try {
+  //     // Create 'following' document for the user who clicked the button
+  //     await firestore
+  //       .collection('users')
+  //       .doc(user.uid)
+  //       .collection('following')
+  //       .doc(userId)
+  //       .set({
+  //         following: true,
+  //       });
 
-      // Create 'followers' document for the user who is being followed
-      await firestore
-        .collection('users')
-        .doc(userId)
-        .collection('followers')
-        .doc(user.uid)
-        .set({
-          follower: true,
-        });
+  //     // Create 'followers' document for the user who is being followed
+  //     await firestore
+  //       .collection('users')
+  //       .doc(userId)
+  //       .collection('followers')
+  //       .doc(user.uid)
+  //       .set({
+  //         follower: true,
+  //       });
 
-      setIsFollowing(true);
-    } catch (error) {
-      console.error('Error following user:', error);
-    }
+  //     setIsFollowing(true);
+  //   } catch (error) {
+  //     console.error('Error following user:', error);
+  //   }
 
-    // const followedByRef = collection(db, `users/${userId}/followed`)
-    // const followingRef = collection(db, `users/${userId}/following`)
+  //   // const followedByRef = collection(db, `users/${userId}/followed`)
+  //   // const followingRef = collection(db, `users/${userId}/following`)
 
-    // store data in state
-  };
-
-  // THIS IS THE NEW FEATURE, JUST WORK ON IT
+  //   // store data in state
+  // };
 
   useEffect(() => {
     if (user?.uid === userId) {
@@ -101,25 +99,29 @@ const UserProfile = () => {
 
   return (
     <div className="shadow p-2  bg-slate-600 rounded md:w-2/3 mx-auto">
-      <div className="flex items-center gap-2 mb-2 p-2">
-        <Image
-          src={userProfile?.photoURL || defaultAvatar}
-          alt="Picture of the profil owner"
-          width={30}
-          height={30}
-          className="rounded-full"
-        />
-        <h1 className="text-teal-50 text-center">{` ${
-          userProfile?.displayName ||
-          userProfile?.username ||
-          'Anonymous'
-        }`}</h1>
-        <span className="border-2 rounded p-1 text-sm cursor-pointer text-white">
-          {!alreadyFollowed ? 'Follow' : 'Unfollow'}
-        </span>
-        <p className="text-white">
-          {userProfile ? userProfile?.bio : 'No bdasdasdio'}
-        </p>
+      <div className="flex flex-col border-b-2 p-1">
+        <div className="flex items-center gap-2 pb-2">
+          <Image
+            src={userProfile?.photoURL || defaultAvatar}
+            alt="Picture of the profil owner"
+            width={30}
+            height={30}
+            className="rounded-full"
+          />
+          <h1 className="text-teal-50 text-center text-sm">{` ${
+            userProfile?.displayName ||
+            userProfile?.username ||
+            'Anonymous'
+          }`}</h1>
+          <span className="border-2 rounded p-1 text-sm cursor-pointer text-white">
+            {!alreadyFollowed ? 'Follow' : 'Unfollow'}
+          </span>
+        </div>
+        <div>
+          <p className="text-white text-sm">
+            {userProfile ? userProfile?.bio : 'No bdasdasdio'}
+          </p>
+        </div>
       </div>
 
       <div>
