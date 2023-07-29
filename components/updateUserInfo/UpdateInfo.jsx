@@ -43,7 +43,9 @@ const UpdateInfo = () => {
     setUsername('');
     setFullname('');
     setBio('');
-    router.push('/profile');
+    setTimeout(async () => {
+      router.reload();
+    }, 1000);
   };
 
   return (
