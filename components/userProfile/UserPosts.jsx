@@ -10,7 +10,6 @@ import { useRouter } from 'next/router';
 import Post from '../post/Post';
 import Modal from '../Modal';
 import { AuthContext } from '../Layout';
-import PostButtons from './PostButtons';
 import { deletePost } from './utils/deletePost';
 
 const UserPosts = () => {
