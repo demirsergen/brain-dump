@@ -17,6 +17,7 @@ const runPrompt = async (prompt) => {
   });
 
   console.log(response.data);
+  // try this
 };
 
 // runPrompt();
