@@ -5,10 +5,15 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const runPrompt = async (prompt) => {
+export const runPrompt = async (prompt) => {
   const response = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
-    prompt,
+    messages: [
+      {
+        role: 'user',
+        content: prompt,
+      },
+    ],
     temperature: 1,
     max_tokens: 256,
     top_p: 1,
@@ -16,8 +21,6 @@ const runPrompt = async (prompt) => {
     presence_penalty: 0,
   });
 
-  console.log(response.data);
+  console.log(response.data.choices.message);
   // try this
 };
-
-// runPrompt();

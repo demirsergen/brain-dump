@@ -11,6 +11,7 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { runPrompt } from '../openai';
 
 const Dashboard = () => {
   const [allPosts, setAllPosts] = useState();
@@ -47,6 +48,8 @@ const Dashboard = () => {
   useEffect(() => {
     getAllPosts();
   }, []);
+
+  runPrompt('hello old friend...');
 
   if (filteredPosts) {
     return (
