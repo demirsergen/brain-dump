@@ -10,9 +10,10 @@ export const runPrompt = async (prompt) => {
     model: 'gpt-3.5-turbo',
     messages: [
       {
-        role: 'user',
-        content: prompt,
+        role: 'system',
+        content: 'You are a helpful assistant.',
       },
+      { role: 'user', content: prompt },
     ],
     temperature: 1,
     max_tokens: 256,
@@ -21,6 +22,6 @@ export const runPrompt = async (prompt) => {
     presence_penalty: 0,
   });
 
-  console.log(response.data.choices.message);
+  console.log(response.data.choices[0].message.content);
   // try this
 };
