@@ -99,7 +99,7 @@ const UserProfile = () => {
 
   return (
     <div className="shadow p-2  bg-slate-600 rounded md:w-2/3 mx-auto">
-      <div className="flex flex-col border-b-2 p-1">
+      <div className="flex flex-col border-b-2 p-2 mb-2">
         <div className="flex items-center gap-2 pb-2">
           <Image
             src={userProfile?.photoURL || defaultAvatar}
