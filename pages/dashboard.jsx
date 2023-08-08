@@ -49,7 +49,7 @@ const Dashboard = () => {
     getAllPosts();
   }, []);
 
-  runPrompt('how are you?');
+  runPrompt('how are you??');
 
   if (filteredPosts) {
     return (
