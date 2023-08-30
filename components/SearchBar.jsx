@@ -25,7 +25,7 @@ const SearchBar = ({ getSearchResults }) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search for tags..."
-          className="flex-grow p-1 rounded rounded-r-none"
+          className="flex-grow px-1 py-1.5 rounded rounded-r-none"
         />
         <input
           type="submit"
