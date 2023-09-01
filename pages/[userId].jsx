@@ -52,7 +52,7 @@ const UserProfile = () => {
     });
   };
 
-  // // FINISH UP THIS FUNCTION
+  // // FINISH UP THIS FUNCTIONN
   // const handleFollow = async () => {
   //   if (!user) return router.push('/auth/login');
 
