@@ -52,7 +52,8 @@ const UserProfile = () => {
     });
   };
 
-  // // FINISH UP THIS FUNCTIONN
+  // FINISH UP THIS FUNCTIONN
+  // read firebase docs
   // const handleFollow = async () => {
   //   if (!user) return router.push('/auth/login');
 
