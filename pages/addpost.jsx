@@ -79,6 +79,9 @@ const Addpost = () => {
     router.push('/profile');
   };
 
+  // ADD BUTTONS TO CHOOSE THE TYPE OF POST IMAGE - TEXT
+  // CONFIGURE FIREBASE DATABASE ACCORDINGLY
+
   return (
     <div className="py-4 bg-slate-600 rounded w-2/3 mx-auto">
       <h1 className="text-teal-50 text-center font-bold">

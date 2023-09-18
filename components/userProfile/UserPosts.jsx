@@ -53,7 +53,7 @@ const UserPosts = () => {
     return <Modal handleModal={handleModal} deleteId={deleteId} />;
   }
   if (loading) {
-    return <div className="text-red-900">Loading...</div>;
+    return <div className="">Loading...</div>;
   }
 
   return (
